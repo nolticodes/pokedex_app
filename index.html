@@ -29,7 +29,7 @@
 
 </head>
 
-<body>
+<body onload="init()">
 
     <header>
         <section class="header_content">
@@ -51,13 +51,14 @@
                 <h2>Gen 1</h2>
                 <h2>Gen 2</h2>
                 <h2>Gen 3</h2>
+                <h2>Gen 4</h2>
             </div>
 
             <div class="main_content_all_pokecards" id="all_pokecards_id">
                 <div class="main_content_pokecard">
                     <div class="main_content_pokecard_header">
-                        <h3>#1</h3>
-                        <h3>Bulbasaur</h3>
+                        <h3>#<span id="pokemon_id_id">1</span></h3>
+                        <h3 id="pokemon_name_id">Bulbasaur</h3>
                     </div>
 
                     <div class="main_content_pokecard_main">
@@ -70,7 +71,6 @@
 
                 </div>
             </div>
-
 
         </section>
 
