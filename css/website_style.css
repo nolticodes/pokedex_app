@@ -1,0 +1,59 @@
+* {
+    font-family: monospace;
+    color: white;
+}
+
+/* FOOTER */
+.header_content {
+    padding: 0 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_content img {
+    width: 40px;
+    height: 40px;
+}
+
+.header_content_title_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+
+/* MAIN */
+.main_content {
+    padding: 0 80px;
+}
+
+/* FILTERSECTION */
+.main_content_filter_section {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 16px;
+}
+
+.main_content_filter_section h2 {
+    font-weight: 200;
+}
+
+.main_content_filter_section h2:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* POKECARD OVERVIEW */
+.main_content_all_pokecards {
+    padding: 20px 0;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px 16px
+}

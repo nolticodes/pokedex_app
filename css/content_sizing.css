@@ -15,7 +15,7 @@ header {
     width: 100%;
     max-width: 1920px;
     height: 100%;
-    background-color: blue;
+    background-color: rgb(15, 32, 41);
 }
 
 main {
@@ -30,7 +30,7 @@ main {
     width: 100%;
     max-width: 1920px;
     min-height: calc(100dvh - 240px);
-    background-color: orange;
+    background-color: rgb(11, 22, 29);
 }
 
 footer {
@@ -45,5 +45,5 @@ footer {
     width: 100%;
     max-width: 1920px;
     height: 100%;
-    background-color: green;
+    background-color: rgb(15, 32, 41);
 }
