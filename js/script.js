@@ -25,10 +25,10 @@ function renderPokemonCard() {
                     <h3>${capitalizeFirstLetter(pokemon.name)}</h3>
                 </div>
                 <div class="main_content_pokecard_main">
-                    <!-- Main content for each pokecard -->
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i + 1}.svg">
                 </div>
                 <div class="main_content_pokecard_footer">
-                    <!-- Footer content for each pokecard -->
+                    
                 </div>
             </div>
         `;
@@ -48,6 +48,9 @@ function renderTwentyPokemonCards() {
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+
+
 
 
 
