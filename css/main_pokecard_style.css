@@ -30,7 +30,8 @@
 }
 
 .main_content_pokecard_main img {
-    width: 250px;
+    height: 70%;
+    width: 70%;
 }
 
 .main_content_pokecard_footer {

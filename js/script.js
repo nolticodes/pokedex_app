@@ -1,6 +1,6 @@
 let allPokemons = [];
 let currentPokemons = [];
-let currentPokomesIndex = 0;
+let currentPokemonsCounter = 0;
 
 async function logPokemons() {
     let pokemoonAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=500");
@@ -16,6 +16,7 @@ async function init() {
 
 function renderPokemonCard() {
     pokemonCardsRef = document.getElementById("all_pokecards_id");
+    pokemonCardsRef.innerHTML = ""
     for (let i = 0; i < currentPokemons.length; i++) {
         let pokemon = currentPokemons[i];
         let pokecardHTML = `
@@ -40,14 +41,25 @@ function renderTwentyPokemonCards() {
     for (let i = 0; i < 20; i++) {
         console.log(allPokemons.results[i]); 
         currentPokemons.push(allPokemons.results[i]);
+        currentPokemonsCounter = currentPokemonsCounter + 1;
     }
-    currentPokomesIndex = currentPokomesIndex + 1;
-    console.log(currentPokemons)
 }
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+function loadMorePokemons() {
+    let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
+
+    for (let i = 0; i < nextPokemons.length; i++) {
+        currentPokemons.push(nextPokemons[i]);
+    }
+
+    currentPokemonsCounter = currentPokemonsCounter + 20;
+    renderPokemonCard();
+};
+
 
 
 
