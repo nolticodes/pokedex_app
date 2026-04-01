@@ -42,7 +42,31 @@ function renderTwentyPokemonCards() {
         currentPokemons.push(allPokemons.results[i]);
         currentPokemonsCounter = currentPokemonsCounter + 1;
     }
+    getPokemonDetails(currentPokemons);
     renderPokemonCard(currentPokemons);
+    
+}
+
+async function getPokemonDetails(pokemonArray) {
+    let currentPokemonDetails = [];
+    for (let i = 0; i < pokemonArray.length; i++) {
+        let pokemonDetailsAsHTTPResponse = await fetch(pokemonArray[i].url);
+        let pokemonDetails = await pokemonDetailsAsHTTPResponse.json();
+        let fetchedPokemonDetails = {
+            name: "",
+            url: "",
+            id: "",
+            types: [],
+        };
+        fetchedPokemonDetails.name = pokemonDetails.name;
+        fetchedPokemonDetails.url = pokemonDetails.url;
+        fetchedPokemonDetails.id = pokemonDetails.id;
+        for (let j = 0; j < pokemonDetails.types.length; j++) {
+            fetchedPokemonDetails.types.push(pokemonDetails.types[j].type.name);
+        }
+        currentPokemonDetails.push(fetchedPokemonDetails);
+    }
+    return currentPokemonDetails;
 }
 
 function capitalizeFirstLetter(string) {
@@ -55,6 +79,7 @@ function loadMorePokemons() {
         currentPokemons.push(nextPokemons[i]);
     }
     currentPokemonsCounter = currentPokemonsCounter + 20;
+    getPokemonDetails(currentPokemons);
     renderPokemonCard(currentPokemons);
 };
 
@@ -64,6 +89,7 @@ function searchPokemon() {
         let currentPokemonsFiltered = currentPokemons.filter(function (pokemonName) {
             return comparePokemonNames(pokemonName, searchInputRef);
         });
+        getPokemonDetails(currentPokemonsFiltered);
         renderPokemonCard(currentPokemonsFiltered);
     }
 }
@@ -71,6 +97,7 @@ function searchPokemon() {
 function comparePokemonNames(pokemonName, searchInputRef) {
     return pokemonName.name.toLowerCase().includes(searchInputRef);
 }
+
 
 
 
