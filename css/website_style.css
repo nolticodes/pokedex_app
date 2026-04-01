@@ -23,6 +23,16 @@
     gap: 16px;
 }
 
+.header_content_search_section {
+    display: flex;
+    gap: 16px;
+}
+
+.header_content_search_section img {
+    width: 32px;
+    height: 32px;
+}
+
 .header_content input {
     width: 280px;
     height: 32px;
