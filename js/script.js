@@ -27,7 +27,9 @@ function renderPokemonCard(pokemonArray) {
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${((pokemon.url).split("/")).at(6)}.svg">
                 </div>
                 <div class="main_content_pokecard_footer">
-                    
+                    <div>
+                        
+                    </div>
                 </div>
             </div>
         `;
