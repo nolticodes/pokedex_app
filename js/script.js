@@ -51,14 +51,22 @@ function capitalizeFirstLetter(string) {
 
 function loadMorePokemons() {
     let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
-
     for (let i = 0; i < nextPokemons.length; i++) {
         currentPokemons.push(nextPokemons[i]);
     }
-
     currentPokemonsCounter = currentPokemonsCounter + 20;
     renderPokemonCard();
 };
+
+function searchPokemon() {
+    let searchInputRef = document.getElementById("search_input_id");
+    currentPokemons = currentPokemons.filter(comparePokemonNames(searchInputRef.value))
+    console.log(currentPokemons);
+}
+
+function comparePokemonNames(searchInputRef) {
+    return pokemonName == searchInputRef;
+}
 
 
 
