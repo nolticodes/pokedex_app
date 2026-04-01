@@ -5,12 +5,11 @@ let currentPokemonsCounter = 0;
 async function logPokemons() {
     let pokemoonAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=500");
     allPokemons = await pokemoonAsHTTPResponse.json();
-    console.log(allPokemons.results[1]);
 }
 
 async function init() {
     await logPokemons();
-    renderTwentyPokemonCards()
+    renderTwentyPokemonCards();
 }
 
 function renderPokemonCard(pokemonArray) {
@@ -21,11 +20,11 @@ function renderPokemonCard(pokemonArray) {
         let pokecardHTML = `
             <div class="main_content_pokecard">
                 <div class="main_content_pokecard_header">
-                    <h3>#<span>${(pokemon.url).charAt((pokemon.url).length - 2)}</span></h3>
+                    <h3>#<span>${((pokemon.url).split("/")).at(6)}</span></h3>
                     <h3>${capitalizeFirstLetter(pokemon.name)}</h3>
                 </div>
                 <div class="main_content_pokecard_main">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${(pokemon.url).charAt((pokemon.url).length - 2)}.svg">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${((pokemon.url).split("/")).at(6)}.svg">
                 </div>
                 <div class="main_content_pokecard_footer">
                     
@@ -38,11 +37,10 @@ function renderPokemonCard(pokemonArray) {
 
 function renderTwentyPokemonCards() {
     for (let i = 0; i < 20; i++) {
-        console.log(allPokemons.results[i]); 
         currentPokemons.push(allPokemons.results[i]);
         currentPokemonsCounter = currentPokemonsCounter + 1;
     }
-    renderPokemonCard(currentPokemons)
+    renderPokemonCard(currentPokemons);
 }
 
 function capitalizeFirstLetter(string) {
@@ -59,16 +57,17 @@ function loadMorePokemons() {
 };
 
 function searchPokemon() {
-    let searchInputRef = document.getElementById("search_input_id").value;
-    let currentPokemonsFiltered = currentPokemons.filter(function(pokemonName) {
-        return comparePokemonNames(pokemonName, searchInputRef); 
-    });
-    renderPokemonCard(currentPokemonsFiltered);
+    let searchInputRef = document.getElementById("search_input_id").value.toLowerCase();
+    if (searchInputRef.length >= 3) {
+        let currentPokemonsFiltered = currentPokemons.filter(function (pokemonName) {
+            return comparePokemonNames(pokemonName, searchInputRef);
+        });
+        renderPokemonCard(currentPokemonsFiltered);
+    }
 }
 
-
 function comparePokemonNames(pokemonName, searchInputRef) {
-    return pokemonName.name == searchInputRef;
+    return pokemonName.name.toLowerCase().includes(searchInputRef);
 }
 
 
