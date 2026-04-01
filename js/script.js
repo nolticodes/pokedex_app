@@ -21,11 +21,11 @@ function renderPokemonCard(pokemonArray) {
         let pokecardHTML = `
             <div class="main_content_pokecard">
                 <div class="main_content_pokecard_header">
-                    <h3>#<span>${i + 1}</span></h3>
+                    <h3>#<span>${(pokemon.url).charAt((pokemon.url).length - 2)}</span></h3>
                     <h3>${capitalizeFirstLetter(pokemon.name)}</h3>
                 </div>
                 <div class="main_content_pokecard_main">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i + 1}.svg">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${(pokemon.url).charAt((pokemon.url).length - 2)}.svg">
                 </div>
                 <div class="main_content_pokecard_footer">
                     
