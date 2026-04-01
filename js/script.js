@@ -11,14 +11,13 @@ async function logPokemons() {
 async function init() {
     await logPokemons();
     renderTwentyPokemonCards()
-    renderPokemonCard();
 }
 
-function renderPokemonCard() {
-    pokemonCardsRef = document.getElementById("all_pokecards_id");
+function renderPokemonCard(pokemonArray) {
+    let pokemonCardsRef = document.getElementById("all_pokecards_id");
     pokemonCardsRef.innerHTML = ""
-    for (let i = 0; i < currentPokemons.length; i++) {
-        let pokemon = currentPokemons[i];
+    for (let i = 0; i < pokemonArray.length; i++) {
+        let pokemon = pokemonArray[i];
         let pokecardHTML = `
             <div class="main_content_pokecard">
                 <div class="main_content_pokecard_header">
@@ -43,6 +42,7 @@ function renderTwentyPokemonCards() {
         currentPokemons.push(allPokemons.results[i]);
         currentPokemonsCounter = currentPokemonsCounter + 1;
     }
+    renderPokemonCard(currentPokemons)
 }
 
 function capitalizeFirstLetter(string) {
@@ -55,17 +55,20 @@ function loadMorePokemons() {
         currentPokemons.push(nextPokemons[i]);
     }
     currentPokemonsCounter = currentPokemonsCounter + 20;
-    renderPokemonCard();
+    renderPokemonCard(currentPokemons);
 };
 
 function searchPokemon() {
-    let searchInputRef = document.getElementById("search_input_id");
-    currentPokemons = currentPokemons.filter(comparePokemonNames(searchInputRef.value))
-    console.log(currentPokemons);
+    let searchInputRef = document.getElementById("search_input_id").value;
+    let currentPokemonsFiltered = currentPokemons.filter(function(pokemonName) {
+        return comparePokemonNames(pokemonName, searchInputRef); 
+    });
+    renderPokemonCard(currentPokemonsFiltered);
 }
 
-function comparePokemonNames(searchInputRef) {
-    return pokemonName == searchInputRef;
+
+function comparePokemonNames(pokemonName, searchInputRef) {
+    return pokemonName.name == searchInputRef;
 }
 
 
