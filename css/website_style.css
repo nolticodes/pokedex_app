@@ -3,7 +3,7 @@
     color: white;
 }
 
-/* FOOTER */
+/* HEADER */
 .header_content {
     padding: 0 80px;
     display: flex;
@@ -21,6 +21,15 @@
     justify-content: center;
     align-items: center;
     gap: 16px;
+}
+
+.header_content input {
+    width: 280px;
+    height: 32px;
+    border-radius: 16px;
+    border: none;
+    padding: 0 16px;
+    color: black;
 }
 
 
