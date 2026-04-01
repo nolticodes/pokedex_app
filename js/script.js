@@ -9,7 +9,7 @@ async function logPokemons() {
 
 async function init() {
     await logPokemons();
-    renderTwentyPokemonCards();
+    await renderTwentyPokemonCards();
 }
 
 function renderPokemonCard(pokemonArray) {
@@ -20,15 +20,15 @@ function renderPokemonCard(pokemonArray) {
         let pokecardHTML = `
             <div class="main_content_pokecard">
                 <div class="main_content_pokecard_header">
-                    <h3>#<span>${((pokemon.url).split("/")).at(6)}</span></h3>
+                    <h3>#<span>${pokemon.id}</span></h3>
                     <h3>${capitalizeFirstLetter(pokemon.name)}</h3>
                 </div>
                 <div class="main_content_pokecard_main">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${((pokemon.url).split("/")).at(6)}.svg">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg">
                 </div>
                 <div class="main_content_pokecard_footer">
                     <div>
-                        
+                    
                     </div>
                 </div>
             </div>
@@ -37,14 +37,15 @@ function renderPokemonCard(pokemonArray) {
     }
 }
 
-function renderTwentyPokemonCards() {
+async function renderTwentyPokemonCards() {
+    let firstTwentyPokemons = [];
     for (let i = 0; i < 20; i++) {
-        currentPokemons.push(allPokemons.results[i]);
-        currentPokemonsCounter = currentPokemonsCounter + 1;
+        firstTwentyPokemons.push(allPokemons.results[i]);
     }
-    getPokemonDetails(currentPokemons);
+    let detailedPokemons = await getPokemonDetails(firstTwentyPokemons);
+    currentPokemons = detailedPokemons;
+    currentPokemonsCounter = 20;
     renderPokemonCard(currentPokemons);
-    
 }
 
 async function getPokemonDetails(pokemonArray) {
@@ -73,29 +74,30 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function loadMorePokemons() {
+async function loadMorePokemons() {
     let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
-    for (let i = 0; i < nextPokemons.length; i++) {
-        currentPokemons.push(nextPokemons[i]);
+    let nextPokemonsWithDetails = await getPokemonDetails(nextPokemons);
+    for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
+        currentPokemons.push(nextPokemonsWithDetails[i]);
     }
     currentPokemonsCounter = currentPokemonsCounter + 20;
-    getPokemonDetails(currentPokemons);
     renderPokemonCard(currentPokemons);
-};
-
-function searchPokemon() {
-    let searchInputRef = document.getElementById("search_input_id").value.toLowerCase();
-    if (searchInputRef.length >= 3) {
-        let currentPokemonsFiltered = currentPokemons.filter(function (pokemonName) {
-            return comparePokemonNames(pokemonName, searchInputRef);
-        });
-        getPokemonDetails(currentPokemonsFiltered);
-        renderPokemonCard(currentPokemonsFiltered);
-    }
 }
 
-function comparePokemonNames(pokemonName, searchInputRef) {
-    return pokemonName.name.toLowerCase().includes(searchInputRef);
+function searchPokemon() {
+    let searchInputRef = document.getElementById("search_input_id").value.trim().toLowerCase();
+    if (searchInputRef.length < 3) {
+        renderPokemonCard(currentPokemons);
+        return;
+    }
+    let currentPokemonsFiltered = currentPokemons.filter(function (pokemon) {
+        return comparePokemonNames(pokemon, searchInputRef);
+    });
+    renderPokemonCard(currentPokemonsFiltered);
+}
+
+function comparePokemonNames(pokemon, searchInputRef) {
+    return pokemon.name.toLowerCase().includes(searchInputRef);
 }
 
 
