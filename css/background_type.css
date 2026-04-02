@@ -1,8 +1,7 @@
-.fire_background {
+.type_background {
     background: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url(../assets/img/type_backgrounds/type_fire_background.png);
 }
 
 .water_background {

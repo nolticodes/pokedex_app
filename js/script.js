@@ -23,7 +23,7 @@ function renderPokemonCard(pokemonArray) {
                     <h3>#<span>${pokemon.id}</span></h3>
                     <h3>${capitalizeFirstLetter(pokemon.name)}</h3>
                 </div>
-                <div class="main_content_pokecard_main ${renderPokemonTypeBackground(pokemon.types)}">
+                <div class="main_content_pokecard_main type_background" ${renderPokemonTypeBackground(pokemon.types)}>
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg">
                 </div>
                 <div class="main_content_pokecard_footer">
@@ -38,51 +38,52 @@ function renderPokemonCard(pokemonArray) {
 }
 
 function renderPokemonTypeBackground(pokemonTypes) {
-    let typeBackgroundHTML = "";
-    for (let i = 0; i < pokemonTypes.length; i++) {
-        typeBackgroundHTML += getHTMLForPokemonTypeBackground(pokemonTypes[i])
+    if (pokemonTypes.length == 1) {
+        return `style="background-image:url('${getHTMLForPokemonTypeBackground(pokemonTypes[0])}')"`
+    } else {
+        return `style="background-image: url('${getHTMLForPokemonTypeBackground(pokemonTypes[0])}'), url('${getHTMLForPokemonTypeBackground(pokemonTypes[1])}'); background-size: 50%, 50%; background-position: left, right"`
     }
-    return typeBackgroundHTML;
 }
+
 
 function getHTMLForPokemonTypeBackground(pokemonType) {
     switch (pokemonType) {
         case "normal":
-            return " normal_background";
+            return "./assets/img/type_backgrounds/type_normal_background.png";
         case "fire":
-            return " fire_background";
+            return "./assets/img/type_backgrounds/type_fire_background.png";
         case "water":
-            return " water_background";
+            return "./assets/img/type_backgrounds/type_water_background.png";
         case "electric":
-            return " electric_background";
+            return "./assets/img/type_backgrounds/type_electric_background.png";
         case "grass":
-            return " grass_background";
+            return "./assets/img/type_backgrounds/type_grass_background.png";
         case "ice":
-            return " ice_background";
+            return "./assets/img/type_backgrounds/type_ice_background.png";
         case "fighting":
-            return " fighting_background";
+            return "./assets/img/type_backgrounds/type_fighting_background.png";
         case "poison":
-            return " poison_background";
+            return "./assets/img/type_backgrounds/type_poison_background.png";
         case "ground":
-            return " ground_background";
+            return "./assets/img/type_backgrounds/type_ground_background.png";
         case "flying":
-            return " flying_background";
+            return "./assets/img/type_backgrounds/type_flying_background.png";
         case "psychic":
-            return " psychic_background";
+            return "./assets/img/type_backgrounds/type_psychic_background.png";
         case "bug":
-            return " bug_background";
+            return "./assets/img/type_backgrounds/type_bug_background.png";
         case "rock":
-            return " rock_background";
+            return "./assets/img/type_backgrounds/type_rock_background.png";
         case "ghost":
-            return " ghost_background";
+            return "./assets/img/type_backgrounds/type_ghost_background.png";
         case "dragon":
-            return " dragon_background";
+            return "./assets/img/type_backgrounds/type_dragon_background.png";
         case "dark":
-            return " dark_background";
+            return "./assets/img/type_backgrounds/type_dark_background.png";
         case "steel":
-            return " steel_background";
+            return "./assets/img/type_backgrounds/type_steel_background.png";
         case "fairy":
-            return " fairy_background";
+            return "./assets/img/type_backgrounds/type_fairy_background.png";
         default:
             return "";
     }
