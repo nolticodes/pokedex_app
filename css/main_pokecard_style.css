@@ -38,3 +38,17 @@
     width: 100%;
     height: 15%;
 }
+
+.main_content_pokecard_footer_types {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.main_content_pokecard_footer_types img {
+    width: 64px;
+    height: 64px;
+}

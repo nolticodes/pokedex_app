@@ -27,7 +27,7 @@ function renderPokemonCard(pokemonArray) {
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg">
                 </div>
                 <div class="main_content_pokecard_footer">
-                    <div>
+                    <div class="main_content_pokecard_footer_types">
                         ${renderPokemonType(pokemon.types)}
                     </div>
                 </div>
@@ -72,11 +72,12 @@ function getHTMLForPokemonType(pokemonType) {
     return "<img src='./assets/img/type_icons/Type=Dark.svg'>";
             case "steel":
     return "<img src='./assets/img/type_icons/Type=Steel.svg'>";
+            case "fairy":
+    return "<img src='./assets/img/type_icons/Type=Fairy.svg'>";
             default:
-    return "/";
+    return "unknown type";
 }
 }
-
 
 function renderPokemonType(pokemonTypes) {
     let typeHTML = "";
@@ -85,7 +86,6 @@ function renderPokemonType(pokemonTypes) {
     }
     return typeHTML
 }
-
 
 async function renderTwentyPokemonCards() {
     let firstTwentyPokemons = [];
