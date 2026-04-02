@@ -39,39 +39,39 @@ function renderPokemonCard(pokemonArray) {
 function getHTMLForPokemonType(pokemonType) {
     switch (pokemonType) {
             case "normal":
-    return "<img src='./assets/img/type_icons/Pokémon_Normal_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Normal.svg'>";
             case "fire":
-    return "<img src='./assets/img/type_icons/Pokémon_Fire_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Fire.svg'>";
             case "water":
-    return "<img src='./assets/img/type_icons/Pokémon_Water_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Water.svg'>";
             case "electric":
-    return "<img src='./assets/img/type_icons/Pokémon_Electric_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Electric.svg'>";
             case "grass":
-    return "<img src='./assets/img/type_icons/Pokémon_Grass_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Grass.svg'>";
             case "ice":
-    return "<img src='./assets/img/type_icons/Pokémon_Ice_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Ice.svg'>";
             case "fighting":
-    return "<img src='./assets/img/type_icons/Pokémon_Fighting_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Fighting.svg'>";
             case "poison":
-    return "<img src='./assets/img/type_icons/Pokémon_Poison_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Poison.svg'>";
             case "ground":
-    return "<img src='./assets/img/type_icons/Pokémon_Ground_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Ground.svg'>";
             case "flying":
-    return "<img src='./assets/img/type_icons/Pokémon_Flying_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Flying.svg'>";
             case "psychic":
-    return "<img src='./assets/img/type_icons/Pokémon_Psychic_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Psychic.svg'>";
             case "bug":
-    return "<img src='./assets/img/type_icons/Pokémon_Bug_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Bug.svg'>";
             case "rock":
-    return "<img src='./assets/img/type_icons/Pokémon_Rock_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Rock.svg'>";
             case "ghost":
-    return "<img src='./assets/img/type_icons/Pokémon_Ghost_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Ghost.svg'>";
             case "dragon":
-    return "<img src='./assets/img/type_icons/Pokémon_Dragon_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Dragon.svg'>";
             case "dark":
-    return "<img src='./assets/img/type_icons/Pokémon_Dark_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Dark.svg'>";
             case "steel":
-    return "<img src='./assets/img/type_icons/Pokémon_Steel_Type_Icon.png'>";
+    return "<img src='./assets/img/type_icons/Type=Steel.svg'>";
             default:
     return "/";
 }
