@@ -28,7 +28,7 @@ function renderPokemonCard(pokemonArray) {
                 </div>
                 <div class="main_content_pokecard_footer">
                     <div>
-                    
+                        ${renderPokemonType(pokemon.types)}
                     </div>
                 </div>
             </div>
@@ -36,6 +36,56 @@ function renderPokemonCard(pokemonArray) {
         pokemonCardsRef.innerHTML += pokecardHTML
     }
 }
+function getHTMLForPokemonType(pokemonType) {
+    switch (pokemonType) {
+            case "normal":
+    return "<img src='./assets/img/type_icons/Pokémon_Normal_Type_Icon.png'>";
+            case "fire":
+    return "<img src='./assets/img/type_icons/Pokémon_Fire_Type_Icon.png'>";
+            case "water":
+    return "<img src='./assets/img/type_icons/Pokémon_Water_Type_Icon.png'>";
+            case "electric":
+    return "<img src='./assets/img/type_icons/Pokémon_Electric_Type_Icon.png'>";
+            case "grass":
+    return "<img src='./assets/img/type_icons/Pokémon_Grass_Type_Icon.png'>";
+            case "ice":
+    return "<img src='./assets/img/type_icons/Pokémon_Ice_Type_Icon.png'>";
+            case "fighting":
+    return "<img src='./assets/img/type_icons/Pokémon_Fighting_Type_Icon.png'>";
+            case "poison":
+    return "<img src='./assets/img/type_icons/Pokémon_Poison_Type_Icon.png'>";
+            case "ground":
+    return "<img src='./assets/img/type_icons/Pokémon_Ground_Type_Icon.png'>";
+            case "flying":
+    return "<img src='./assets/img/type_icons/Pokémon_Flying_Type_Icon.png'>";
+            case "psychic":
+    return "<img src='./assets/img/type_icons/Pokémon_Psychic_Type_Icon.png'>";
+            case "bug":
+    return "<img src='./assets/img/type_icons/Pokémon_Bug_Type_Icon.png'>";
+            case "rock":
+    return "<img src='./assets/img/type_icons/Pokémon_Rock_Type_Icon.png'>";
+            case "ghost":
+    return "<img src='./assets/img/type_icons/Pokémon_Ghost_Type_Icon.png'>";
+            case "dragon":
+    return "<img src='./assets/img/type_icons/Pokémon_Dragon_Type_Icon.png'>";
+            case "dark":
+    return "<img src='./assets/img/type_icons/Pokémon_Dark_Type_Icon.png'>";
+            case "steel":
+    return "<img src='./assets/img/type_icons/Pokémon_Steel_Type_Icon.png'>";
+            default:
+    return "/";
+}
+}
+
+
+function renderPokemonType(pokemonTypes) {
+    let typeHTML = "";
+    for (let i = 0; i < pokemonTypes.length; i++) {
+        typeHTML += getHTMLForPokemonType(pokemonTypes[i])
+    }
+    return typeHTML
+}
+
 
 async function renderTwentyPokemonCards() {
     let firstTwentyPokemons = [];
