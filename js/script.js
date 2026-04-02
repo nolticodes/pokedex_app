@@ -23,7 +23,7 @@ function renderPokemonCard(pokemonArray) {
                     <h3>#<span>${pokemon.id}</span></h3>
                     <h3>${capitalizeFirstLetter(pokemon.name)}</h3>
                 </div>
-                <div class="main_content_pokecard_main">
+                <div class="main_content_pokecard_main ${renderPokemonTypeBackground(pokemon.types)}">
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg">
                 </div>
                 <div class="main_content_pokecard_footer">
@@ -36,47 +36,99 @@ function renderPokemonCard(pokemonArray) {
         pokemonCardsRef.innerHTML += pokecardHTML
     }
 }
+
+function renderPokemonTypeBackground(pokemonTypes) {
+    let typeBackgroundHTML = "";
+    for (let i = 0; i < pokemonTypes.length; i++) {
+        typeBackgroundHTML += getHTMLForPokemonTypeBackground(pokemonTypes[i])
+    }
+    return typeBackgroundHTML;
+}
+
+function getHTMLForPokemonTypeBackground(pokemonType) {
+    switch (pokemonType) {
+        case "normal":
+            return " normal_background";
+        case "fire":
+            return " fire_background";
+        case "water":
+            return " water_background";
+        case "electric":
+            return " electric_background";
+        case "grass":
+            return " grass_background";
+        case "ice":
+            return " ice_background";
+        case "fighting":
+            return " fighting_background";
+        case "poison":
+            return " poison_background";
+        case "ground":
+            return " ground_background";
+        case "flying":
+            return " flying_background";
+        case "psychic":
+            return " psychic_background";
+        case "bug":
+            return " bug_background";
+        case "rock":
+            return " rock_background";
+        case "ghost":
+            return " ghost_background";
+        case "dragon":
+            return " dragon_background";
+        case "dark":
+            return " dark_background";
+        case "steel":
+            return " steel_background";
+        case "fairy":
+            return " fairy_background";
+        default:
+            return "";
+    }
+}
+
 function getHTMLForPokemonType(pokemonType) {
     switch (pokemonType) {
-            case "normal":
-    return "<img src='./assets/img/type_icons/Type=Normal.svg'>";
-            case "fire":
-    return "<img src='./assets/img/type_icons/Type=Fire.svg'>";
-            case "water":
-    return "<img src='./assets/img/type_icons/Type=Water.svg'>";
-            case "electric":
-    return "<img src='./assets/img/type_icons/Type=Electric.svg'>";
-            case "grass":
-    return "<img src='./assets/img/type_icons/Type=Grass.svg'>";
-            case "ice":
-    return "<img src='./assets/img/type_icons/Type=Ice.svg'>";
-            case "fighting":
-    return "<img src='./assets/img/type_icons/Type=Fighting.svg'>";
-            case "poison":
-    return "<img src='./assets/img/type_icons/Type=Poison.svg'>";
-            case "ground":
-    return "<img src='./assets/img/type_icons/Type=Ground.svg'>";
-            case "flying":
-    return "<img src='./assets/img/type_icons/Type=Flying.svg'>";
-            case "psychic":
-    return "<img src='./assets/img/type_icons/Type=Psychic.svg'>";
-            case "bug":
-    return "<img src='./assets/img/type_icons/Type=Bug.svg'>";
-            case "rock":
-    return "<img src='./assets/img/type_icons/Type=Rock.svg'>";
-            case "ghost":
-    return "<img src='./assets/img/type_icons/Type=Ghost.svg'>";
-            case "dragon":
-    return "<img src='./assets/img/type_icons/Type=Dragon.svg'>";
-            case "dark":
-    return "<img src='./assets/img/type_icons/Type=Dark.svg'>";
-            case "steel":
-    return "<img src='./assets/img/type_icons/Type=Steel.svg'>";
-            case "fairy":
-    return "<img src='./assets/img/type_icons/Type=Fairy.svg'>";
-            default:
-    return "unknown type";
-}
+        case "normal":
+            return "<img src='./assets/img/type_icons/Type=Normal.svg'>";
+        case "fire":
+            return "<img src='./assets/img/type_icons/Type=Fire.svg'>";
+        case "water":
+            return "<img src='./assets/img/type_icons/Type=Water.svg'>";
+        case "electric":
+            return "<img src='./assets/img/type_icons/Type=Electric.svg'>";
+        case "grass":
+            return "<img src='./assets/img/type_icons/Type=Grass.svg'>";
+        case "ice":
+            return "<img src='./assets/img/type_icons/Type=Ice.svg'>";
+        case "fighting":
+            return "<img src='./assets/img/type_icons/Type=Fighting.svg'>";
+        case "poison":
+            return "<img src='./assets/img/type_icons/Type=Poison.svg'>";
+        case "ground":
+            return "<img src='./assets/img/type_icons/Type=Ground.svg'>";
+        case "flying":
+            return "<img src='./assets/img/type_icons/Type=Flying.svg'>";
+        case "psychic":
+            return "<img src='./assets/img/type_icons/Type=Psychic.svg'>";
+        case "bug":
+            return "<img src='./assets/img/type_icons/Type=Bug.svg'>";
+        case "rock":
+            return "<img src='./assets/img/type_icons/Type=Rock.svg'>";
+        case "ghost":
+            return "<img src='./assets/img/type_icons/Type=Ghost.svg'>";
+        case "dragon":
+            return "<img src='./assets/img/type_icons/Type=Dragon.svg'>";
+        case "dark":
+            return "<img src='./assets/img/type_icons/Type=Dark.svg'>";
+        case "steel":
+            return "<img src='./assets/img/type_icons/Type=Steel.svg'>";
+        case "fairy":
+            return "<img src='./assets/img/type_icons/Type=Fairy.svg'>";
+        default:
+            return "unknown type";
+    }
 }
 
 function renderPokemonType(pokemonTypes) {
