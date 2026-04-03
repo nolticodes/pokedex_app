@@ -61,8 +61,8 @@
 
 .main_content_pokecard_main_pokemon_img {
     position: absolute;
-    top: calc((100% - 200px)/2);
-    left: calc((100% - 200px)/2);
+    top: calc((100% - 70%)/2);
+    left: calc((100% - 70%)/2);
 }
 
 .main_content_pokecard_footer {
