@@ -23,9 +23,10 @@ function renderPokemonCard(pokemonArray) {
                     <h3>#<span>${pokemon.id}</span></h3>
                     <h3>${capitalizeFirstLetter(pokemon.name)}</h3>
                 </div>
-                <div class="main_content_pokecard_main type_background" ${renderPokemonTypeBackground(pokemon.types)}>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg">
-                </div>
+
+                ${getPokemonBackgroundHTML(pokemon)}
+
+
                 <div class="main_content_pokecard_footer">
                     <div class="main_content_pokecard_footer_types">
                         ${renderPokemonType(pokemon.types)}
@@ -37,14 +38,36 @@ function renderPokemonCard(pokemonArray) {
     }
 }
 
-function renderPokemonTypeBackground(pokemonTypes) {
-    if (pokemonTypes.length == 1) {
-        return `style="background-image:url('${getHTMLForPokemonTypeBackground(pokemonTypes[0])}')"`
+function getPokemonBackgroundHTML(pokemon) {
+    if (pokemon.types.length === 1) {
+        return `
+            <div class="main_content_pokecard_main type_background" style="background-image: url('${getHTMLForPokemonTypeBackground(pokemon.types[0])}');">
+                
+                <div class="main_content_pokecard_main_pokemon_img">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg">
+                </div>
+            </div>
+        `;
     } else {
-        return `style="background-image: url('${getHTMLForPokemonTypeBackground(pokemonTypes[0])}'), url('${getHTMLForPokemonTypeBackground(pokemonTypes[1])}'); background-size: 50%, 50%; background-position: left, right"`
+        return `
+            <div class="main_content_pokecard_main type_background_split">
+
+                <div class="background_left">
+                    <img src="${getHTMLForPokemonTypeBackground(pokemon.types[0])}">
+                </div>
+
+                <div class="background_right">
+                    <img src="${getHTMLForPokemonTypeBackground(pokemon.types[1])}">
+                </div>
+
+                <div class="main_content_pokecard_main_pokemon_img">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg">
+                </div>
+
+            </div>
+        `;
     }
 }
-
 
 function getHTMLForPokemonTypeBackground(pokemonType) {
     switch (pokemonType) {

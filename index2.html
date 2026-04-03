@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .pokecard {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            background-color: red;
+            display: flex;
+        }
+
+        .img_left {
+            width: 50%;
+            height: 100%;
+        }
+
+        .img_left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .img_right {
+            width: 50%;
+            height: 100%;
+        }
+
+        .img_right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .pokemon_img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: calc((100% - 200px)/2);
+            left: calc((100% - 200px)/2);
+        }
+
+        .pokemon_img img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="pokecard">
+
+        <div class="img_left">
+            <img src="./assets/img/type_backgrounds/type_dark_background.png">
+        </div>
+
+        <div class="img_right">
+            <img src="./assets/img/type_backgrounds/type_fire_background.png">
+        </div>
+        <div class="pokemon_img">
+            <img src="./assets/img/img/pokeball_icon.svg" </div>
+        </div>
+
+</body>
+
+</html>
