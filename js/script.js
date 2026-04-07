@@ -202,14 +202,17 @@ function capitalizeFirstLetter(string) {
 
 async function loadMorePokemons() {
     showLoadingSpinner();
-    let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
-    let nextPokemonsWithDetails = await getPokemonDetails(nextPokemons);
-    for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
-        currentPokemons.push(nextPokemonsWithDetails[i]);
+    try {
+        let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
+        let nextPokemonsWithDetails = await getPokemonDetails(nextPokemons);
+        for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
+            currentPokemons.push(nextPokemonsWithDetails[i]);
+        }
+        currentPokemonsCounter = currentPokemonsCounter + 20;
+        renderPokemonCard(currentPokemons);
+    } finally {
+        hideLoadingSpinner();
     }
-    currentPokemonsCounter = currentPokemonsCounter + 20;
-    renderPokemonCard(currentPokemons);
-    hideLoadingSpinner();
 }
 
 function searchPokemon() {
@@ -230,11 +233,13 @@ function comparePokemonNames(pokemon, searchInputRef) {
 
 // LAODIGNSPINNER
 function showLoadingSpinner() {
-    document.getElementById("loader_id").classList.remove("hidden")
+    document.getElementById("loader_id").classList.remove("hidden");
+    document.body.style.overflow = "hidden";
 }
 
 function hideLoadingSpinner() {
-    document.getElementById("loader_id").classList.add("hidden")
+    document.getElementById("loader_id").classList.add("hidden");
+    document.body.style.overflow = "auto";
 }
 
 
