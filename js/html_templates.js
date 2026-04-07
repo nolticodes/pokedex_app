@@ -155,7 +155,10 @@ function getHTMLForPokemonDetailsForDetailCard(pokemon) {
                 </div>
             </div>
 
-            <div id="stats_main_id">
+            <div id="stats_main_id" class="display_none">
+            </div>
+
+            <div id="stats_stats_id">
             </div>
         </section>
     `;

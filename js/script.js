@@ -1,6 +1,8 @@
 let allPokemons = [];
 let currentPokemons = [];
 let currentPokemonsCounter = 0;
+let currentPokemonStatsMain = [];
+let currentPokemonStatsStats = [];
 
 async function logPokemons() {
     let pokemoonAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=493");
@@ -101,21 +103,21 @@ function getPokemonBackgroundForDetailCardHTML(pokemon) {
 
 async function renderAllPokemonStats(pokemonID) {
     await buildStatsMainArrayOfPokemonShown(pokemonID);
-    document.getElementById("stats_main_id").innerHTML = renderStatsMainOfPokemonShown();
+    document.getElementById("stats_main_id").innerHTML = getHTMLForStatsMainOfPokemonShown();
+    await buildStatsStatsArrayOfPokemonShown(pokemonID);
+    document.getElementById("stats_stats_id").innerHTML = getHTMLForStatsStatsOfPokemonShown();
 }
 
-function renderStatsMainOfPokemonShown() {
+function getHTMLForStatsMainOfPokemonShown() {
     return `
         <div class="pokemon_detail_card_lower_half_stats">
-            <p>height: ${currentPokemonStatsMain[0].height}</p>
-            <p>weight: ${currentPokemonStatsMain[0].weight}</p>
-            <p>base experience: ${currentPokemonStatsMain[0].baseExperience}</p>
-            <p>abilities: ${currentPokemonStatsMain[0].abilities}</p>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Height: </p> <span>${Number(currentPokemonStatsMain[0].height)/10} m</span></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Weight: </p> <span>${currentPokemonStatsMain[0].weight} kg</span></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Base Experience: </p> <span>${currentPokemonStatsMain[0].baseExperience}</span></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Abilities: </p> <span>${currentPokemonStatsMain[0].abilities.join(", ")}</span></div>
         </div>
     `
 }
-
-let currentPokemonStatsMain = [];
 
 async function buildStatsMainArrayOfPokemonShown(pokemonID) {
     currentPokemonStatsMain = [];
@@ -135,6 +137,32 @@ async function buildStatsMainArrayOfPokemonShown(pokemonID) {
     }
     currentPokemonStatsMain.push(fetchedpokemonStatsMain);
     return currentPokemonStatsMain;
+}
+
+async function buildStatsStatsArrayOfPokemonShown(pokemonID) {
+    currentPokemonStatsStats = {};
+    let pokemonStatsStatsASHTTPResponse = await fetch(currentPokemons[pokemonID - 1].url);
+    let pokemonStatsStats = await pokemonStatsStatsASHTTPResponse.json();
+    let fetchedPokemonStatsStats = {};
+    for (let i = 0; i < pokemonStatsStats.stats.length; i++) {
+        let statName = pokemonStatsStats.stats[i].stat.name
+        let statValue = pokemonStatsStats.stats[i].base_stat
+        fetchedPokemonStatsStats[statName] = statValue;
+    }
+    currentPokemonStatsStats = fetchedPokemonStatsStats
+}
+
+function getHTMLForStatsStatsOfPokemonShown() {
+    return `
+        <div class="pokemon_detail_card_lower_half_stats">
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>hp:</p> <span> ${currentPokemonStatsStats.hp}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>attack:</p> <span> ${currentPokemonStatsStats.attack}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>defense:</p> <span> ${currentPokemonStatsStats.defense}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>special-attack:</p> <span> ${currentPokemonStatsStats["special-attack"]}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>special-defense:</p> <span> ${currentPokemonStatsStats["special-defense"]}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>speed:</p> <span> ${currentPokemonStatsStats.speed}</span> </div>
+        </div>
+    `
 }
 
 // #endregion POKEMON DETAIL CARDS
