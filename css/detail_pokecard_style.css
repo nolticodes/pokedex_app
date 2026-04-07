@@ -111,6 +111,10 @@ dialog::backdrop {
     display: none
 }
 
+.display {
+    display: block;
+}
+
 #stats_main_id {
     height: 85%;
     width: 100%;

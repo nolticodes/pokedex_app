@@ -108,16 +108,6 @@ async function renderAllPokemonStats(pokemonID) {
     document.getElementById("stats_stats_id").innerHTML = getHTMLForStatsStatsOfPokemonShown();
 }
 
-function getHTMLForStatsMainOfPokemonShown() {
-    return `
-        <div class="pokemon_detail_card_lower_half_stats">
-            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Height: </p> <span>${Number(currentPokemonStatsMain[0].height)/10} m</span></div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Weight: </p> <span>${currentPokemonStatsMain[0].weight} kg</span></div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Base Experience: </p> <span>${currentPokemonStatsMain[0].baseExperience}</span></div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Abilities: </p> <span>${currentPokemonStatsMain[0].abilities.join(", ")}</span></div>
-        </div>
-    `
-}
 
 async function buildStatsMainArrayOfPokemonShown(pokemonID) {
     currentPokemonStatsMain = [];
@@ -152,17 +142,15 @@ async function buildStatsStatsArrayOfPokemonShown(pokemonID) {
     currentPokemonStatsStats = fetchedPokemonStatsStats
 }
 
-function getHTMLForStatsStatsOfPokemonShown() {
-    return `
-        <div class="pokemon_detail_card_lower_half_stats">
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>hp:</p> <span> ${currentPokemonStatsStats.hp}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>attack:</p> <span> ${currentPokemonStatsStats.attack}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>defense:</p> <span> ${currentPokemonStatsStats.defense}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>special-attack:</p> <span> ${currentPokemonStatsStats["special-attack"]}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>special-defense:</p> <span> ${currentPokemonStatsStats["special-defense"]}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>speed:</p> <span> ${currentPokemonStatsStats.speed}</span> </div>
-        </div>
-    `
+function switchCategory(category, categoryTitle) {
+    document.getElementById("stats_main_id").classList.add("display_none");
+    document.getElementById("category_main_id").classList.remove("selected");
+    document.getElementById("stats_stats_id").classList.add("display_none");
+    document.getElementById("category_stats_id").classList.remove("selected");
+    document.getElementById("stats_evo_id").classList.add("display_none");
+    document.getElementById("category_evo_id").classList.remove("selected");
+    document.getElementById(category).classList.remove("display_none");
+    document.getElementById(categoryTitle).classList.add("selected");
 }
 
 // #endregion POKEMON DETAIL CARDS

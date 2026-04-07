@@ -144,21 +144,24 @@ function getHTMLForPokemonDetailsForDetailCard(pokemon) {
 
         <section class="pokemon_detail_card_lower_half">
             <div class="pokemon_detail_card_lower_half_categories">
-                <div class="pokemon_detail_card_lower_half_categories_title selected">
+                <div id="category_main_id" class="pokemon_detail_card_lower_half_categories_title selected" onclick="switchCategory('stats_main_id', 'category_main_id')">
                     <h4>main</h4>
                 </div>
-                <div class="pokemon_detail_card_lower_half_categories_title">
+                <div id="category_stats_id" class="pokemon_detail_card_lower_half_categories_title" onclick="switchCategory('stats_stats_id', 'category_stats_id')">
                     <h4>stats</h4>
                 </div>
-                <div class="pokemon_detail_card_lower_half_categories_title">
+                <div id="category_evo_id" class="pokemon_detail_card_lower_half_categories_title" onclick="switchCategory('stats_evo_id', 'category_evo_id')">
                     <h4>evo chain</h4>
                 </div>
             </div>
 
-            <div id="stats_main_id" class="display_none">
+            <div id="stats_main_id">
             </div>
 
-            <div id="stats_stats_id">
+            <div id="stats_stats_id" class="display_none">
+            </div>
+
+            <div id="stats_evo_id" class="display_none">
             </div>
         </section>
     `;
@@ -188,4 +191,28 @@ function getDoubleTypeBackgroundForDetailCardHTML(pokemon) {
             </div>
         </div>
     `;
+}
+
+function getHTMLForStatsMainOfPokemonShown() {
+    return `
+        <div class="pokemon_detail_card_lower_half_stats">
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Height: </p> <span>${Number(currentPokemonStatsMain[0].height) / 10} m</span></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Weight: </p> <span>${currentPokemonStatsMain[0].weight} kg</span></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Base Experience: </p> <span>${currentPokemonStatsMain[0].baseExperience}</span></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Abilities: </p> <span>${currentPokemonStatsMain[0].abilities.join(", ")}</span></div>
+        </div>
+    `
+}
+
+function getHTMLForStatsStatsOfPokemonShown() {
+    return `
+        <div class="pokemon_detail_card_lower_half_stats">
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>hp:</p> <span> ${currentPokemonStatsStats.hp}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>attack:</p> <span> ${currentPokemonStatsStats.attack}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>defense:</p> <span> ${currentPokemonStatsStats.defense}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>special-attack:</p> <span> ${currentPokemonStatsStats["special-attack"]}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>special-defense:</p> <span> ${currentPokemonStatsStats["special-defense"]}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>speed:</p> <span> ${currentPokemonStatsStats.speed}</span> </div>
+        </div>
+    `
 }
