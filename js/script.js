@@ -18,7 +18,7 @@ function renderPokemonCard(pokemonArray) {
     for (let i = 0; i < pokemonArray.length; i++) {
         let pokemon = pokemonArray[i];
         let pokecardHTML = `
-            <div class="main_content_pokecard" onclick="openPokemonDetailCard(${pokemon.id}, '${pokemon.name}')">
+            <div class="main_content_pokecard" onclick="openPokemonDetailCard(${pokemon.id})">
                 <div class="main_content_pokecard_header">
                     <h3>#<span>${pokemon.id}</span></h3>
                     <h3>${capitalizeFirstLetter(pokemon.name)}</h3>
@@ -38,9 +38,79 @@ function renderPokemonCard(pokemonArray) {
     }
 }
 
-function openPokemonDetailCard(pokemonID, pokemonName) {
-    document.getElementById("dialog_pokemon_name_id").innerHTML = pokemonID + capitalizeFirstLetter(pokemonName);
+function openPokemonDetailCard(pokemonID) {
+    let pokemon = getPokemonDetailCardInfos(pokemonID);
+    let detailCardHTML = getHTMLForPokemonDetailsForDetailCard(pokemon);
+
+    renderPokemonDetailCard(detailCardHTML);
+    openPokemonDetailDialog();
+}
+
+function getPokemonDetailCardInfos(pokemonID) {
+    return currentPokemons[pokemonID - 1];
+}
+
+function renderPokemonDetailCard(detailCardHTML) {
+    let dialogRef = document.getElementById("pokemon_detail_card_dialog_id");
+    dialogRef.innerHTML = "";
+    dialogRef.innerHTML = detailCardHTML;
+}
+
+function openPokemonDetailDialog() {
     document.getElementById("pokemon_detail_card_dialog_id").showModal();
+}
+
+function getHTMLForPokemonDetailsForDetailCard(pokemon) {
+    return `
+        <section class="pokemon_detail_card_upper_half">
+            <div class="pokemon_detail_card_upper_half_title">
+                <h2>#${pokemon.id} ${capitalizeFirstLetter(pokemon.name)}</h2>
+            </div>
+
+            ${getPokemonBackgroundForDetailCardHTML(pokemon)}
+
+            <div class="pokemon_detail_card_upper_half_img_type">
+                ${renderPokemonType(pokemon.types)}
+            </div>
+        </section>
+
+        <section class="pokemon_detail_card_lower_half">
+        </section>
+    `;
+}
+
+function getPokemonBackgroundForDetailCardHTML(pokemon) {
+    if (pokemon.types.length === 1) {
+        return getSingleTypeBackgroundForDetailCardHTML(pokemon);
+    } else {
+        return getDoubleTypeBackgroundForDetailCardHTML(pokemon);
+    }
+}
+
+function getSingleTypeBackgroundForDetailCardHTML(pokemon) {
+    return `
+        <div class="pokemon_detail_card_upper_half_img_pokemon type_background" style="background-image: url('${getHTMLForPokemonTypeBackground(pokemon.types[0])}');">
+            <div class="pokemon_detail_card_upper_half_img_pokemon_img">        
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg">
+            </div>
+        </div>
+    `;
+}
+
+function getDoubleTypeBackgroundForDetailCardHTML(pokemon) {
+    return `
+        <div class="pokemon_detail_card_upper_half_img_pokemon type_background_split">
+            <div class="background_left">
+                <img src="${getHTMLForPokemonTypeBackground(pokemon.types[0])}">
+            </div>
+            <div class="background_right">
+                <img src="${getHTMLForPokemonTypeBackground(pokemon.types[1])}">
+            </div>
+            <div class="pokemon_detail_card_upper_half_img_pokemon_img">        
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg">
+            </div>
+        </div>
+    `;
 }
 
 function getPokemonBackgroundHTML(pokemon) {

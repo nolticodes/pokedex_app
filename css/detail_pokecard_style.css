@@ -34,9 +34,34 @@ dialog::backdrop {
 .pokemon_detail_card_upper_half_img_pokemon {
     width: 100%;
     height: 70%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    position: relative;
+}
+
+.pokemon_detail_card_upper_half_img_pokemon_img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon_detail_card_upper_half_img_pokemon_img img {
+    height: 80%;
 }
 
 .pokemon_detail_card_upper_half_img_type {
     width: 100%;
     height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px
+}
+
+.pokemon_detail_card_upper_half_img_type img {
+    height: 100%;
 }
