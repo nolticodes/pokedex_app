@@ -58,7 +58,7 @@ async function getPokemonDetails(pokemonArray) {
             types: [],
         };
         fetchedPokemonDetails.name = pokemonDetails.name;
-        fetchedPokemonDetails.url = pokemonDetails.url;
+        fetchedPokemonDetails.url = pokemonArray[i].url;
         fetchedPokemonDetails.id = pokemonDetails.id;
         for (let j = 0; j < pokemonDetails.types.length; j++) {
             fetchedPokemonDetails.types.push(pokemonDetails.types[j].type.name);
@@ -77,11 +77,11 @@ function capitalizeFirstLetter(string) {
 // #endregion auxiliary functions
 
 // #region POKEMON DETAIL CARDS
-function openPokemonDetailCard(pokemonID) {
+async function openPokemonDetailCard(pokemonID) {
     let pokemon = currentPokemons[pokemonID - 1];
     let detailCardHTML = getHTMLForPokemonDetailsForDetailCard(pokemon);
     renderPokemonDetailCard(detailCardHTML);
-    renderAllPokemonStats(pokemonID)
+    await renderAllPokemonStats(pokemonID)
     document.getElementById("pokemon_detail_card_dialog_id").showModal()
 }
 
@@ -99,12 +99,26 @@ function getPokemonBackgroundForDetailCardHTML(pokemon) {
     }
 }
 
-function renderAllPokemonStats(pokemonID) {
-    
+async function renderAllPokemonStats(pokemonID) {
+    await buildStatsMainArrayOfPokemonShown(pokemonID);
+    document.getElementById("stats_main_id").innerHTML = renderStatsMainOfPokemonShown();
 }
 
+function renderStatsMainOfPokemonShown() {
+    return `
+        <div class="pokemon_detail_card_lower_half_stats">
+            <p>height: ${currentPokemonStatsMain[0].height}</p>
+            <p>weight: ${currentPokemonStatsMain[0].weight}</p>
+            <p>base experience: ${currentPokemonStatsMain[0].baseExperience}</p>
+            <p>abilities: ${currentPokemonStatsMain[0].abilities}</p>
+        </div>
+    `
+}
+
+let currentPokemonStatsMain = [];
+
 async function buildStatsMainArrayOfPokemonShown(pokemonID) {
-    let currentPokemonStatsMain = [];
+    currentPokemonStatsMain = [];
     let pokemonStatsMainAsHTTPResoponse = await fetch(currentPokemons[pokemonID - 1].url);
     let pokemonStatsMain = await pokemonStatsMainAsHTTPResoponse.json();
     let fetchedpokemonStatsMain = {

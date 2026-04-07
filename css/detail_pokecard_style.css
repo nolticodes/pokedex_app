@@ -96,6 +96,7 @@ dialog::backdrop {
 
 .pokemon_detail_card_lower_half_categories_title h4 {
     font-weight: 400;
+    font-size: 16px;
 }
 
 .selected h4 {
@@ -104,4 +105,14 @@ dialog::backdrop {
 
 .selected {
     background-color: rgb(40, 90, 110);
+}
+
+.pokemon_detail_card_lower_half_stats {
+    height: 85%;
+    width: 100%;
+}
+
+.pokemon_detail_card_lower_half_stats p {
+    width: 200px;
+    font-size: 16px;
 }

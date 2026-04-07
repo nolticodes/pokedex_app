@@ -154,6 +154,9 @@ function getHTMLForPokemonDetailsForDetailCard(pokemon) {
                     <h4>evo chain</h4>
                 </div>
             </div>
+
+            <div id="stats_main_id">
+            </div>
         </section>
     `;
 }
