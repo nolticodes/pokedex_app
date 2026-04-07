@@ -202,17 +202,16 @@ function capitalizeFirstLetter(string) {
 
 async function loadMorePokemons() {
     showLoadingSpinner();
-    try {
-        let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
-        let nextPokemonsWithDetails = await getPokemonDetails(nextPokemons);
-        for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
-            currentPokemons.push(nextPokemonsWithDetails[i]);
-        }
-        currentPokemonsCounter = currentPokemonsCounter + 20;
-        renderPokemonCard(currentPokemons);
-    } finally {
-        hideLoadingSpinner();
+    let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
+    let nextPokemonsWithDetails = await getPokemonDetails(nextPokemons);
+    for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
+        currentPokemons.push(nextPokemonsWithDetails[i]);
     }
+    currentPokemonsCounter = currentPokemonsCounter + 20;
+    renderPokemonCard(currentPokemons);
+    setTimeout(() => {
+        hideLoadingSpinner();
+    }, 2000);
 }
 
 function searchPokemon() {
