@@ -20,6 +20,7 @@ dialog::backdrop {
     width: 100%;
     height: 50%;
     background-color: rgb(12, 30, 37);
+    position: relative;
 }
 
 .pokemon_detail_card_upper_half_title {
@@ -64,6 +65,37 @@ dialog::backdrop {
 
 .pokemon_detail_card_upper_half_img_type img {
     height: 100%;
+}
+
+.img_next_button {
+    position: absolute;
+    top: calc((100% - 40px)/2);
+    right: 16px
+}
+
+.img_next_button:hover {
+    cursor: pointer;
+}
+
+.img_next_button img {
+    width: 40px;
+    height: 40px;
+}
+
+.img_prev_button {
+    position: absolute;
+    top: calc((100% - 40px)/2);
+    left: 16px
+}
+
+.img_prev_button:hover {
+    cursor: pointer;
+}
+
+.img_prev_button img {
+    width: 40px;
+    height: 40px;
+    rotate: 180deg;
 }
 
 .pokemon_detail_card_lower_half {

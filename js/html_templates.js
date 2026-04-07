@@ -140,6 +140,15 @@ function getHTMLForPokemonDetailsForDetailCard(pokemon) {
             <div class="pokemon_detail_card_upper_half_img_type">
                 ${renderPokemonType(pokemon.types)}
             </div>
+
+            <div class="img_next_button" onclick="nextPokemon(${pokemon.id})">
+                <img src="./assets/img/img/next_prev_icon.svg">
+            </div>
+
+            <div class="img_prev_button" onclick="previousPokemon(${pokemon.id})">>
+                <img src="./assets/img/img/next_prev_icon.svg">
+            </div>
+            
         </section>
 
         <section class="pokemon_detail_card_lower_half">

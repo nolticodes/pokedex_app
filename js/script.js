@@ -153,6 +153,14 @@ function switchCategory(category, categoryTitle) {
     document.getElementById(categoryTitle).classList.add("selected");
 }
 
+function nextPokemon(pokemonID) {
+
+}
+
+function previousPokemon(pokemonID) {
+
+}
+
 // #endregion POKEMON DETAIL CARDS
 
 // #region LOAD POKEMON BUTTON
