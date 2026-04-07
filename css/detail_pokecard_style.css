@@ -1,0 +1,42 @@
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8)
+}
+
+.pokemon_detail_card_dialog_style {
+    padding: 0;
+    width: 400px;
+    height: 600px;
+    border-radius: 16px;
+    border: none;
+    top: calc((100% - 600px)/2);
+    left: calc((100% - 400px)/2);
+}
+
+.pokemon_detail_card_upper_half {
+    width: 100%;
+    height: 50%;
+    background-color: rgb(12, 30, 37);
+}
+
+.pokemon_detail_card_upper_half_title {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.pokemon_detail_card_upper_half_img_pokemon {
+    width: 100%;
+    height: 70%;
+}
+
+.pokemon_detail_card_upper_half_img_type {
+    width: 100%;
+    height: 15%;
+}

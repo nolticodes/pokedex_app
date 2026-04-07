@@ -18,7 +18,7 @@ function renderPokemonCard(pokemonArray) {
     for (let i = 0; i < pokemonArray.length; i++) {
         let pokemon = pokemonArray[i];
         let pokecardHTML = `
-            <div class="main_content_pokecard">
+            <div class="main_content_pokecard" onclick="openPokemonDetailCard(${pokemon.id}, '${pokemon.name}')">
                 <div class="main_content_pokecard_header">
                     <h3>#<span>${pokemon.id}</span></h3>
                     <h3>${capitalizeFirstLetter(pokemon.name)}</h3>
@@ -36,6 +36,11 @@ function renderPokemonCard(pokemonArray) {
         `;
         pokemonCardsRef.innerHTML += pokecardHTML
     }
+}
+
+function openPokemonDetailCard(pokemonID, pokemonName) {
+    document.getElementById("dialog_pokemon_name_id").innerHTML = pokemonID + capitalizeFirstLetter(pokemonName);
+    document.getElementById("pokemon_detail_card_dialog_id").showModal();
 }
 
 function getPokemonBackgroundHTML(pokemon) {
