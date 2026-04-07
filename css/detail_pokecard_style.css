@@ -65,3 +65,43 @@ dialog::backdrop {
 .pokemon_detail_card_upper_half_img_type img {
     height: 100%;
 }
+
+.pokemon_detail_card_lower_half {
+    width: 100%;
+    height: 50%;
+    background-color: rgb(16, 44, 57);
+}
+
+.pokemon_detail_card_lower_half_categories {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon_detail_card_lower_half_categories_title {
+    background-color: rgb(20, 61, 78);
+    height: 100%;
+    width: calc(100% / 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon_detail_card_lower_half_categories_title:hover {
+    cursor: pointer;
+    background-color: rgb(40, 90, 110);
+}
+
+.pokemon_detail_card_lower_half_categories_title h4 {
+    font-weight: 400;
+}
+
+.selected h4 {
+    font-weight: 800;
+}
+
+.selected {
+    background-color: rgb(40, 90, 110);
+}

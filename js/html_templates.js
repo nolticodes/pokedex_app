@@ -143,6 +143,17 @@ function getHTMLForPokemonDetailsForDetailCard(pokemon) {
         </section>
 
         <section class="pokemon_detail_card_lower_half">
+            <div class="pokemon_detail_card_lower_half_categories">
+                <div class="pokemon_detail_card_lower_half_categories_title selected">
+                    <h4>main</h4>
+                </div>
+                <div class="pokemon_detail_card_lower_half_categories_title">
+                    <h4>stats</h4>
+                </div>
+                <div class="pokemon_detail_card_lower_half_categories_title">
+                    <h4>evo chain</h4>
+                </div>
+            </div>
         </section>
     `;
 }

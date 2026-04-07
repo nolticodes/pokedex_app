@@ -81,6 +81,7 @@ function openPokemonDetailCard(pokemonID) {
     let pokemon = currentPokemons[pokemonID - 1];
     let detailCardHTML = getHTMLForPokemonDetailsForDetailCard(pokemon);
     renderPokemonDetailCard(detailCardHTML);
+    renderAllPokemonStats(pokemonID)
     document.getElementById("pokemon_detail_card_dialog_id").showModal()
 }
 
@@ -98,7 +99,7 @@ function getPokemonBackgroundForDetailCardHTML(pokemon) {
     }
 }
 
-function renderAllPokemonStats() {
+function renderAllPokemonStats(pokemonID) {
     
 }
 
