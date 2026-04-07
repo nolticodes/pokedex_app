@@ -201,6 +201,7 @@ function capitalizeFirstLetter(string) {
 }
 
 async function loadMorePokemons() {
+    showLoadingSpinner();
     let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
     let nextPokemonsWithDetails = await getPokemonDetails(nextPokemons);
     for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
@@ -208,6 +209,7 @@ async function loadMorePokemons() {
     }
     currentPokemonsCounter = currentPokemonsCounter + 20;
     renderPokemonCard(currentPokemons);
+    hideLoadingSpinner();
 }
 
 function searchPokemon() {
@@ -226,6 +228,14 @@ function comparePokemonNames(pokemon, searchInputRef) {
     return pokemon.name.toLowerCase().includes(searchInputRef);
 }
 
+// LAODIGNSPINNER
+function showLoadingSpinner() {
+    document.getElementById("loader_id").classList.remove("hidden")
+}
+
+function hideLoadingSpinner() {
+    document.getElementById("loader_id").classList.add("hidden")
+}
 
 
 
