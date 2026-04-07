@@ -3,7 +3,7 @@ let currentPokemons = [];
 let currentPokemonsCounter = 0;
 
 async function logPokemons() {
-    let pokemoonAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=500");
+    let pokemoonAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=493");
     allPokemons = await pokemoonAsHTTPResponse.json();
 }
 

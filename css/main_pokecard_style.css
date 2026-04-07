@@ -5,6 +5,12 @@
     border-radius: 16px;
 }
 
+.main_content_pokecard:hover {
+    transform: scale(1.025);
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
 .main_content_pokecard_header {
     width: 100%;
     height: 13%;
