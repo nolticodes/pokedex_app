@@ -21,6 +21,12 @@ function renderPokemonCard(pokemonArray) {
     pokemonCardsRef.innerHTML = cardsHTML;
 }
 
+function renderNewLoadedPokemonCards(newLoadedPokemonArray) {
+    let pokemonCardsRef = document.getElementById("all_pokecards_id");
+    let cardsHTML = buildPokemonCardsHTML(newLoadedPokemonArray);
+    pokemonCardsRef.innerHTML += cardsHTML;
+}
+
 function buildPokemonCardsHTML(pokemonArray) {
     let html = "";
     for (let i = 0; i < pokemonArray.length; i++) {
@@ -172,7 +178,7 @@ async function loadMorePokemons() {
         currentPokemons.push(nextPokemonsWithDetails[i]);
     }
     currentPokemonsCounter = currentPokemonsCounter + 20;
-    renderPokemonCard(currentPokemons);
+    renderNewLoadedPokemonCards(nextPokemonsWithDetails)
     setTimeout(() => {
         hideLoadingSpinner();
     }, 2000);

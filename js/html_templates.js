@@ -145,7 +145,7 @@ function getHTMLForPokemonDetailsForDetailCard(pokemon) {
                 <img src="./assets/img/img/next_prev_icon.svg">
             </div>
 
-            <div class="img_prev_button" onclick="previousPokemon(${pokemon.id})">>
+            <div class="img_prev_button" onclick="previousPokemon(${pokemon.id})">
                 <img src="./assets/img/img/next_prev_icon.svg">
             </div>
             
