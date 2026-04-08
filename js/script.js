@@ -86,11 +86,29 @@ function capitalizeFirstLetter(string) {
 
 // #region POKEMON DETAIL CARDS
 async function openPokemonDetailCard(pokemonID) {
-    let pokemon = currentPokemons[pokemonID - 1];
+    let pokemon = await buildBaseStatsObjectOfPokemonShown(pokemonID);
     let detailCardHTML = getHTMLForPokemonDetailsForDetailCard(pokemon);
     renderPokemonDetailCard(detailCardHTML);
     await renderAllPokemonStats(pokemonID)
     document.getElementById("pokemon_detail_card_dialog_id").showModal()
+}
+
+async function buildBaseStatsObjectOfPokemonShown(pokemonID) {
+    let pokemonBaseStatsAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID)
+    let pokemonBaseStats = await pokemonBaseStatsAsHTTPResponse.json();
+    let currentPokemonBaseStats = {
+        name: "",
+        types: [],
+        id: "",
+        url: ""
+    }
+    currentPokemonBaseStats.name = pokemonBaseStats.name;
+    for (let i = 0; i < pokemonBaseStats.types.length; i++) {
+        currentPokemonBaseStats.types.push(pokemonBaseStats.types[i].type.name);
+    };
+    currentPokemonBaseStats.id = pokemonBaseStats.id;
+    currentPokemonBaseStats.url = "https://pokeapi.co/api/v2/pokemon/" + pokemonID;
+    return currentPokemonBaseStats;
 }
 
 function renderPokemonDetailCard(detailCardHTML) {
@@ -113,7 +131,6 @@ async function renderAllPokemonStats(pokemonID) {
     await buildStatsStatsArrayOfPokemonShown(pokemonID);
     document.getElementById("stats_stats_id").innerHTML = getHTMLForStatsStatsOfPokemonShown();
 }
-
 
 async function buildStatsMainArrayOfPokemonShown(pokemonID) {
     currentPokemonStatsMain = [];
@@ -160,7 +177,11 @@ function switchCategory(category, categoryTitle) {
 }
 
 function nextPokemon(pokemonID) {
+    if (pokemonID = 493) {
+        
+    } else {
     openPokemonDetailCard(pokemonID + 1)
+    }
 }
 
 function previousPokemon(pokemonID) {
