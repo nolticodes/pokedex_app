@@ -177,15 +177,17 @@ function switchCategory(category, categoryTitle) {
 }
 
 function nextPokemon(pokemonID) {
-    if (pokemonID = 493) {
-        
-    } else {
-    openPokemonDetailCard(pokemonID + 1)
-    }
+    if (pokemonID < 493) {
+        openPokemonDetailCard(pokemonID + 1)
+        document.getElementById("next_button_id_" + pokemonID).classList.add("display_none")
+    } 
 }
 
 function previousPokemon(pokemonID) {
-    openPokemonDetailCard(pokemonID - 1)
+    if (pokemonID > 1 ) {
+        openPokemonDetailCard(pokemonID - 1)
+        document.getElementById("prev_button_id_" + pokemonID).classList.add("display_none")
+    } 
 }
 
 // #endregion POKEMON DETAIL CARDS

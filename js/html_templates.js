@@ -129,28 +129,34 @@ function getPokemonBackgroundHTML(pokemon) {
 }
 
 function getHTMLForPokemonDetailsForDetailCard(pokemon) {
+    let nextButtonHTML = "";
+    let prevButtonHTML = "";
+    if (pokemon.id < 493) {
+        nextButtonHTML = `
+            <div class="img_next_button" onclick="nextPokemon(${pokemon.id})">
+                <img src="./assets/img/img/next_prev_icon.svg">
+            </div>
+        `;
+    }
+    if (pokemon.id > 1) {
+        prevButtonHTML = `
+            <div class="img_prev_button" onclick="previousPokemon(${pokemon.id})">
+                <img src="./assets/img/img/next_prev_icon.svg">
+            </div>
+        `;
+    }
     return `
         <section class="pokemon_detail_card_upper_half">
             <div class="pokemon_detail_card_upper_half_title">
                 <h2>#${pokemon.id} ${capitalizeFirstLetter(pokemon.name)}</h2>
             </div>
-
             ${getPokemonBackgroundForDetailCardHTML(pokemon)}
-
             <div class="pokemon_detail_card_upper_half_img_type">
                 ${renderPokemonType(pokemon.types)}
             </div>
-
-            <div class="img_next_button" onclick="nextPokemon(${pokemon.id})">
-                <img src="./assets/img/img/next_prev_icon.svg">
-            </div>
-
-            <div class="img_prev_button" onclick="previousPokemon(${pokemon.id})">
-                <img src="./assets/img/img/next_prev_icon.svg">
-            </div>
-            
+            ${nextButtonHTML}
+            ${prevButtonHTML}        
         </section>
-
         <section class="pokemon_detail_card_lower_half">
             <div class="pokemon_detail_card_lower_half_categories">
                 <div id="category_main_id" class="pokemon_detail_card_lower_half_categories_title selected" onclick="switchCategory('stats_main_id', 'category_main_id')">
@@ -163,15 +169,9 @@ function getHTMLForPokemonDetailsForDetailCard(pokemon) {
                     <h4>evo chain</h4>
                 </div>
             </div>
-
-            <div id="stats_main_id">
-            </div>
-
-            <div id="stats_stats_id" class="display_none">
-            </div>
-
-            <div id="stats_evo_id" class="display_none">
-            </div>
+            <div id="stats_main_id"></div>
+            <div id="stats_stats_id" class="display_none"></div>
+            <div id="stats_evo_id" class="display_none"></div>
         </section>
     `;
 }
