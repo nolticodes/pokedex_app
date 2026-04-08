@@ -218,12 +218,12 @@ function getHTMLForStatsMainOfPokemonShown() {
 function getHTMLForStatsStatsOfPokemonShown() {
     return `
         <div class="pokemon_detail_card_lower_half_stats">
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>hp:</p> <span> ${currentPokemonStatsStats.hp}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>attack:</p> <span> ${currentPokemonStatsStats.attack}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>defense:</p> <span> ${currentPokemonStatsStats.defense}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>special-attack:</p> <span> ${currentPokemonStatsStats["special-attack"]}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>special-defense:</p> <span> ${currentPokemonStatsStats["special-defense"]}</span> </div>
-            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>speed:</p> <span> ${currentPokemonStatsStats.speed}</span> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>hp:</p> <progress max="155" value="${currentPokemonStatsStats.hp}"></progress> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>attack:</p> <progress max="155" value="${currentPokemonStatsStats.attack}"></progress></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>defense:</p> <progress max="155" value="${currentPokemonStatsStats.defense}"></progress> </div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"> <p>special-attack:</p><progress max="155" value="${currentPokemonStatsStats["special-attack"]}"></progress></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>special-defense:</p><progress max="155" value="${currentPokemonStatsStats["special-defense"]}"></progress></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>speed:</p><progress max="155" value="${currentPokemonStatsStats.speed}"></progress></div>
         </div>
     `
 }
