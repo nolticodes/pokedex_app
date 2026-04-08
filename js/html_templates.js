@@ -205,6 +205,8 @@ function getDoubleTypeBackgroundForDetailCardHTML(pokemon) {
 function getHTMLForStatsMainOfPokemonShown() {
     return `
         <div class="pokemon_detail_card_lower_half_stats">
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Pokedex ID: </p> <span>${currentPokemonStatsMain[0].pokedexID}</span></div>
+            <div class="pokemin_detail_card_lower_half_stats_textline"><p>Generation: </p> <span>${currentPokemonStatsMain[0].generation}</span></div>
             <div class="pokemin_detail_card_lower_half_stats_textline"><p>Height: </p> <span>${Number(currentPokemonStatsMain[0].height) / 10} m</span></div>
             <div class="pokemin_detail_card_lower_half_stats_textline"><p>Weight: </p> <span>${currentPokemonStatsMain[0].weight} kg</span></div>
             <div class="pokemin_detail_card_lower_half_stats_textline"><p>Base Experience: </p> <span>${currentPokemonStatsMain[0].baseExperience}</span></div>

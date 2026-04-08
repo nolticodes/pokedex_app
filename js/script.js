@@ -137,11 +137,15 @@ async function buildStatsMainArrayOfPokemonShown(pokemonID) {
     let pokemonStatsMainAsHTTPResoponse = await fetch(currentPokemons[pokemonID - 1].url);
     let pokemonStatsMain = await pokemonStatsMainAsHTTPResoponse.json();
     let fetchedpokemonStatsMain = {
+        pokedexID: "",
+        generation: "",
         height: "",
         weight: "",
         baseExperience: "",
         abilities: [],
     };
+    fetchedpokemonStatsMain.pokedexID = pokemonStatsMain.id
+    fetchedpokemonStatsMain.generation = checkWhichGeneration(pokemonID)
     fetchedpokemonStatsMain.height = pokemonStatsMain.height;
     fetchedpokemonStatsMain.weight = pokemonStatsMain.weight;
     fetchedpokemonStatsMain.baseExperience = pokemonStatsMain.base_experience;
@@ -150,6 +154,20 @@ async function buildStatsMainArrayOfPokemonShown(pokemonID) {
     }
     currentPokemonStatsMain.push(fetchedpokemonStatsMain);
     return currentPokemonStatsMain;
+}
+
+function checkWhichGeneration(pokemonID) {
+    if (pokemonID <= 151) {
+        return "1";
+    } else if (pokemonID <= 251) {
+        return "2";
+    } else if (pokemonID <= 386) {
+        return "3";
+    } else if (pokemonID <= 493) {
+        return "4";
+    } else {
+        return "Not in this Pokedex";
+    }
 }
 
 async function buildStatsStatsArrayOfPokemonShown(pokemonID) {
