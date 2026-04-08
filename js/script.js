@@ -134,23 +134,20 @@ async function renderAllPokemonStats(pokemonID) {
 
 async function buildStatsMainArrayOfPokemonShown(pokemonID) {
     currentPokemonStatsMain = [];
-    let pokemonStatsMainAsHTTPResoponse = await fetch(currentPokemons[pokemonID - 1].url);
-    let pokemonStatsMain = await pokemonStatsMainAsHTTPResoponse.json();
+    let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID);
+    let pokemonStatsMain = await response.json();
     let fetchedpokemonStatsMain = {
-        pokedexID: "",
-        generation: "",
-        height: "",
-        weight: "",
-        baseExperience: "",
+        pokedexID: pokemonStatsMain.id,
+        generation: checkWhichGeneration(pokemonID),
+        height: pokemonStatsMain.height,
+        weight: pokemonStatsMain.weight,
+        baseExperience: pokemonStatsMain.base_experience,
         abilities: [],
     };
-    fetchedpokemonStatsMain.pokedexID = pokemonStatsMain.id
-    fetchedpokemonStatsMain.generation = checkWhichGeneration(pokemonID)
-    fetchedpokemonStatsMain.height = pokemonStatsMain.height;
-    fetchedpokemonStatsMain.weight = pokemonStatsMain.weight;
-    fetchedpokemonStatsMain.baseExperience = pokemonStatsMain.base_experience;
     for (let i = 0; i < pokemonStatsMain.abilities.length; i++) {
-        fetchedpokemonStatsMain.abilities.push(pokemonStatsMain.abilities[i].ability.name)
+        fetchedpokemonStatsMain.abilities.push(
+            pokemonStatsMain.abilities[i].ability.name
+        );
     }
     currentPokemonStatsMain.push(fetchedpokemonStatsMain);
     return currentPokemonStatsMain;
@@ -171,16 +168,15 @@ function checkWhichGeneration(pokemonID) {
 }
 
 async function buildStatsStatsArrayOfPokemonShown(pokemonID) {
+    let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID);
+    let pokemonStatsStats = await response.json();
     currentPokemonStatsStats = {};
-    let pokemonStatsStatsASHTTPResponse = await fetch(currentPokemons[pokemonID - 1].url);
-    let pokemonStatsStats = await pokemonStatsStatsASHTTPResponse.json();
-    let fetchedPokemonStatsStats = {};
     for (let i = 0; i < pokemonStatsStats.stats.length; i++) {
-        let statName = pokemonStatsStats.stats[i].stat.name
-        let statValue = pokemonStatsStats.stats[i].base_stat
-        fetchedPokemonStatsStats[statName] = statValue;
+        let statName = pokemonStatsStats.stats[i].stat.name;
+        let statValue = pokemonStatsStats.stats[i].base_stat;
+        currentPokemonStatsStats[statName] = statValue;
     }
-    currentPokemonStatsStats = fetchedPokemonStatsStats
+    return currentPokemonStatsStats;
 }
 
 function switchCategory(category, categoryTitle) {
