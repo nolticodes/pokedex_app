@@ -160,11 +160,11 @@ function switchCategory(category, categoryTitle) {
 }
 
 function nextPokemon(pokemonID) {
-
+    openPokemonDetailCard(pokemonID + 1)
 }
 
 function previousPokemon(pokemonID) {
-
+    openPokemonDetailCard(pokemonID - 1)
 }
 
 // #endregion POKEMON DETAIL CARDS
