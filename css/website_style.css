@@ -143,3 +143,9 @@
     font-weight: bold;
     transform: scale(1.05);
 }
+
+/* FOOTER */
+footer a {
+    color: white;
+    font-size: 16px;
+}

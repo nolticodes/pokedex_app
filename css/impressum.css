@@ -1,6 +1,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    color: white;
 }
 
 header {
@@ -16,6 +17,10 @@ header {
     max-width: 1920px;
     height: 100%;
     background-color: rgb(15, 32, 41);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 60px;
 }
 
 main {
@@ -31,6 +36,7 @@ main {
     max-width: 1920px;
     min-height: calc(100dvh - 240px);
     background-color: rgb(11, 22, 29);
+    padding: 60px 60px;
 }
 
 footer {
