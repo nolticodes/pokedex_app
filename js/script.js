@@ -218,7 +218,7 @@ async function loadMorePokemons() {
     renderNewLoadedPokemonCards(nextPokemonsWithDetails)
     setTimeout(() => {
         hideLoadingSpinner();
-    }, 2000);
+    }, 1000);
 }
 // #endregion LOAD POKEMON BUTTON
 
