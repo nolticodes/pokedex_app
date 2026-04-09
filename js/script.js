@@ -106,7 +106,7 @@ async function openPokemonDetailCard(pokemonID) {
         let pokemon = await buildBaseStatsObjectOfPokemonShown(pokemonID);
         let detailCardHTML = getHTMLForPokemonDetailsForDetailCard(pokemon);
         renderPokemonDetailCard(detailCardHTML);
-        await renderAllPokemonStats(pokemonID)
+        await renderAllPokemonStats(pokemonID);
         document.getElementById("pokemon_detail_card_dialog_id").showModal()
     } catch (error) {
         console.error("Error in openPokemonDetailCard", error)
@@ -257,7 +257,7 @@ async function loadMorePokemons() {
             hideLoadingSpinner();
         }, 1000);
     } catch (error) {
-        console.error("Error in loadMorePokemons, error")
+        console.error("Error in loadMorePokemons", error)
     }
 }
 // #endregion LOAD POKEMON BUTTON
@@ -283,12 +283,10 @@ function comparePokemonNames(pokemon, searchInputRef) {
 // #region LAODIGNSPINNER
 function showLoadingSpinner() {
     document.getElementById("loader_id").classList.remove("hidden");
-    document.body.style.overflow = "hidden";
 }
 
 function hideLoadingSpinner() {
-    document.getElementById("loader_id").classList.add("hidden");
-    document.body.style.overflow = "auto";
+    document.getElementById("loader_id").classList.add("hidden");  
 }
 // #endregion LAODIGNSPINNER
 
