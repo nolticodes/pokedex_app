@@ -227,3 +227,28 @@ function getHTMLForStatsStatsOfPokemonShown() {
         </div>
     `
 }
+
+function getHTMLForEvoChainOfPokemonShown() {
+    if (!currentPokemonEvoData.evoStageOneName) {
+        return `
+            <div class="pokemon_detail_card_lower_half_stats">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageNullID}.svg">
+            </div>
+        `
+    } else if (!currentPokemonEvoData.evoStageTwoName) {
+        return `
+            <div class="pokemon_detail_card_lower_half_stats">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageNullID}.svg">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageOneID}.svg">
+            </div>
+        `
+    } else {
+        return `
+            <div class="pokemon_detail_card_lower_half_stats">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageNullID}.svg">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageOneID}.svg">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageTwoID}.svg">            
+            </div>
+        `
+    }
+}

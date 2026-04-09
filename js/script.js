@@ -3,6 +3,7 @@ let currentPokemons = [];
 let currentPokemonsCounter = 0;
 let currentPokemonStatsMain = [];
 let currentPokemonStatsStats = [];
+let currentPokemonEvoData = {}
 
 async function logPokemons() {
     try {
@@ -155,6 +156,8 @@ async function renderAllPokemonStats(pokemonID) {
         document.getElementById("stats_main_id").innerHTML = getHTMLForStatsMainOfPokemonShown();
         await buildStatsStatsArrayOfPokemonShown(pokemonID);
         document.getElementById("stats_stats_id").innerHTML = getHTMLForStatsStatsOfPokemonShown();
+        await getPokemonEvoChainURL(pokemonID)
+        document.getElementById("stats_evo_id").innerHTML = getHTMLForEvoChainOfPokemonShown();
     } catch (error) {
         console.error("Error in renderAllPokemonStats", error)
     }
@@ -295,7 +298,7 @@ async function getPokemonEvoChainURL(pokemonID) {
     let pokemonEvoURLasHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon-species/" + pokemonID + "/");
     let pokemonEvoURL = await pokemonEvoURLasHTTPResponse.json();
     let fetchedPokemonEvoChainData = {}
-    let pokemonEvoData = {}
+    currentPokemonEvoData = {}
     try {
         fetchedPokemonEvoChainData = {
             name: pokemonEvoURL.name,
@@ -303,17 +306,16 @@ async function getPokemonEvoChainURL(pokemonID) {
             evoURL: pokemonEvoURL.evolution_chain.url,
             evoFrom: pokemonEvoURL.evolves_from_species.name,
         }
-        pokemonEvoData = Object.assign(fetchedPokemonEvoChainData, await getPokemonEvoChainData(pokemonEvoURL.evolution_chain.url, pokemonEvoURL.name, pokemonEvoURL.id, pokemonEvoURL.evolves_from_species.name))
+        currentPokemonEvoData = Object.assign(fetchedPokemonEvoChainData, await getPokemonEvoChainData(pokemonEvoURL.evolution_chain.url, pokemonEvoURL.name, pokemonEvoURL.id, pokemonEvoURL.evolves_from_species.name))
     } catch (error) {
         fetchedPokemonEvoChainData = {
             name: pokemonEvoURL.name,
             id: pokemonEvoURL.id,
             evoURL: pokemonEvoURL.evolution_chain.url,
         }
-        pokemonEvoData = Object.assign(fetchedPokemonEvoChainData, await getPokemonEvoChainData(pokemonEvoURL.evolution_chain.url, pokemonEvoURL.name, pokemonEvoURL.id))
-
+        currentPokemonEvoData = Object.assign(fetchedPokemonEvoChainData, await getPokemonEvoChainData(pokemonEvoURL.evolution_chain.url, pokemonEvoURL.name, pokemonEvoURL.id))
     }
-    return pokemonEvoData
+    return currentPokemonEvoData
 }
 
 async function getPokemonEvoChainData(evoURL, name, id, evoFromName) {
@@ -327,18 +329,22 @@ async function getPokemonEvoChainData(evoURL, name, id, evoFromName) {
         currentPokemonId: id,
         evoFromName: evoFromName,
         evoStageNullName: evoStageNull.species.name,
+        evoStageNullID: getPokemonIDWithPokemonName(evoStageNull.species.name)
     };
-    
+
     if (evoStageOne === null) {
-        fetchedPokemonEvoChain = fetchedPokemonEvoChain
+        return fetchedPokemonEvoChain
     } else if (evoStageTwo === null) {
         fetchedPokemonEvoChain = Object.assign(fetchedPokemonEvoChain, {
             evoStageOneName: evoStageOne.species.name,
+            evoStageOneID: getPokemonIDWithPokemonName(evoStageOne.species.name)
         })
     } else {
         fetchedPokemonEvoChain = Object.assign(fetchedPokemonEvoChain, {
             evoStageOneName: evoStageOne.species.name,
+            evoStageOneID: getPokemonIDWithPokemonName(evoStageOne.species.name),
             evoStageTwoName: evoStageTwo.species.name,
+            evoStageTwoID: getPokemonIDWithPokemonName(evoStageTwo.species.name),
         })
     }
     return fetchedPokemonEvoChain
@@ -352,6 +358,14 @@ function checkStage(stageChain) {
         return null;
     }
     return stageChain.evolves_to[0];
+}
+
+function getPokemonIDWithPokemonName(pokemonName) {
+    let pokemonObject = allPokemons.results.find(function(pokemon) {
+        return pokemon.name === pokemonName;
+    });
+    let pokemonID = pokemonObject.url.split("/")[6];
+    return pokemonID 
 }
 
 // #endregion EVOCHAIN
