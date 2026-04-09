@@ -152,7 +152,27 @@ footer a {
 
 /* RESPONSIVE */
 /* HEADER */
+@media (max-width: 750px) {
+    /* HEADER */
+    header {
+        height: 240px;
+    }
+    .header_content {
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+        padding: 0 16px
+    }
 
+    .header_content input {
+        width: 240px;
+    }
+
+    /* MAIN */
+    .main_content {
+        padding: 0 16px;
+    }
+}
 
 
 
