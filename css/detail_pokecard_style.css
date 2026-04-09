@@ -194,7 +194,8 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-    background-color: rgb(140, 190, 170);;
+    background-color: rgb(140, 190, 170);
+    ;
 }
 
 progress:hover {
@@ -203,3 +204,27 @@ progress:hover {
 }
 
 
+/* RESPOSNIVE */
+@media (max-width: 750px) {
+    .pokemon_detail_card_dialog_style {
+        width: 300px;
+        left: calc((100% - 300px) / 2)
+    }
+
+    .pokemon_detail_card_upper_half_img_pokemon_img img {
+        height: 70%;
+    }
+
+    .pokemin_detail_card_lower_half_stats_textline p {
+        font-size: 14px;
+        min-width: 160px;
+    }
+
+    .pokemin_detail_card_lower_half_stats_textline span {
+        font-size: 14px;
+    }
+
+    .pokemon_detail_card_lower_half_categories_title h4 {
+        font-size: 14px;
+    }
+}
