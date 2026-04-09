@@ -286,9 +286,77 @@ function showLoadingSpinner() {
 }
 
 function hideLoadingSpinner() {
-    document.getElementById("loader_id").classList.add("hidden");  
+    document.getElementById("loader_id").classList.add("hidden");
 }
 // #endregion LAODIGNSPINNER
+
+// #region EVO CHAIN
+async function getPokemonEvoChainURL(pokemonID) {
+    let pokemonEvoURLasHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon-species/" + pokemonID + "/");
+    let pokemonEvoURL = await pokemonEvoURLasHTTPResponse.json();
+    let fetchedPokemonEvoChainData = {}
+    let pokemonEvoData = {}
+    try {
+        fetchedPokemonEvoChainData = {
+            name: pokemonEvoURL.name,
+            id: pokemonEvoURL.id,
+            evoURL: pokemonEvoURL.evolution_chain.url,
+            evoFrom: pokemonEvoURL.evolves_from_species.name,
+        }
+        pokemonEvoData = Object.assign(fetchedPokemonEvoChainData, await getPokemonEvoChainData(pokemonEvoURL.evolution_chain.url, pokemonEvoURL.name, pokemonEvoURL.id, pokemonEvoURL.evolves_from_species.name))
+    } catch (error) {
+        fetchedPokemonEvoChainData = {
+            name: pokemonEvoURL.name,
+            id: pokemonEvoURL.id,
+            evoURL: pokemonEvoURL.evolution_chain.url,
+        }
+        pokemonEvoData = Object.assign(fetchedPokemonEvoChainData, await getPokemonEvoChainData(pokemonEvoURL.evolution_chain.url, pokemonEvoURL.name, pokemonEvoURL.id))
+
+    }
+    return pokemonEvoData
+}
+
+async function getPokemonEvoChainData(evoURL, name, id, evoFromName) {
+    let pokemonEvoDataAsHTTPResponse = await fetch(evoURL);
+    let pokemonEvoData = await pokemonEvoDataAsHTTPResponse.json();
+    let evoStageNull = pokemonEvoData.chain;
+    let evoStageOne = checkStage(evoStageNull);
+    let evoStageTwo = checkStage(evoStageOne);
+    let fetchedPokemonEvoChain = {
+        currentPokemonName: name,
+        currentPokemonId: id,
+        evoFromName: evoFromName,
+        evoStageNullName: evoStageNull.species.name,
+    };
+    
+    if (evoStageOne === null) {
+        fetchedPokemonEvoChain = fetchedPokemonEvoChain
+    } else if (evoStageTwo === null) {
+        fetchedPokemonEvoChain = Object.assign(fetchedPokemonEvoChain, {
+            evoStageOneName: evoStageOne.species.name,
+        })
+    } else {
+        fetchedPokemonEvoChain = Object.assign(fetchedPokemonEvoChain, {
+            evoStageOneName: evoStageOne.species.name,
+            evoStageTwoName: evoStageTwo.species.name,
+        })
+    }
+    return fetchedPokemonEvoChain
+}
+
+function checkStage(stageChain) {
+    if (!stageChain) {
+        return null;
+    }
+    if (!stageChain.evolves_to || stageChain.evolves_to.length === 0) {
+        return null;
+    }
+    return stageChain.evolves_to[0];
+}
+
+// #endregion EVOCHAIN
+
+
 
 
 
