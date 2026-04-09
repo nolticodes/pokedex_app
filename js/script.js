@@ -5,13 +5,21 @@ let currentPokemonStatsMain = [];
 let currentPokemonStatsStats = [];
 
 async function logPokemons() {
-    let pokemoonAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=493");
-    allPokemons = await pokemoonAsHTTPResponse.json();
+    try {
+        let pokemoonAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=493");
+        allPokemons = await pokemoonAsHTTPResponse.json();
+    } catch (error) {
+        console.error("Error in logPokemons", error)
+    }
 }
 
 async function init() {
-    await logPokemons();
-    await renderTwentyPokemonCards();
+    try {
+        await logPokemons();
+        await renderTwentyPokemonCards();
+    } catch (error) {
+        console.log("Error in init", error)
+    }
 }
 
 // #region POKEMON MAIN CARDS
@@ -44,36 +52,44 @@ function renderPokemonType(pokemonTypes) {
 }
 
 async function renderTwentyPokemonCards() {
-    let firstTwentyPokemons = [];
-    for (let i = 0; i < 20; i++) {
-        firstTwentyPokemons.push(allPokemons.results[i]);
+    try {
+        let firstTwentyPokemons = [];
+        for (let i = 0; i < 20; i++) {
+            firstTwentyPokemons.push(allPokemons.results[i]);
+        }
+        let detailedPokemons = await getPokemonDetails(firstTwentyPokemons);
+        currentPokemons = detailedPokemons;
+        currentPokemonsCounter = 20;
+        renderPokemonCard(currentPokemons);
+    } catch (error) {
+        console.error("Error in renderTwentyPokemonCards", error)
     }
-    let detailedPokemons = await getPokemonDetails(firstTwentyPokemons);
-    currentPokemons = detailedPokemons;
-    currentPokemonsCounter = 20;
-    renderPokemonCard(currentPokemons);
 }
 
 async function getPokemonDetails(pokemonArray) {
-    let currentPokemonDetails = [];
-    for (let i = 0; i < pokemonArray.length; i++) {
-        let pokemonDetailsAsHTTPResponse = await fetch(pokemonArray[i].url);
-        let pokemonDetails = await pokemonDetailsAsHTTPResponse.json();
-        let fetchedPokemonDetails = {
-            name: "",
-            url: "",
-            id: "",
-            types: [],
-        };
-        fetchedPokemonDetails.name = pokemonDetails.name;
-        fetchedPokemonDetails.url = pokemonArray[i].url;
-        fetchedPokemonDetails.id = pokemonDetails.id;
-        for (let j = 0; j < pokemonDetails.types.length; j++) {
-            fetchedPokemonDetails.types.push(pokemonDetails.types[j].type.name);
+    try {
+        let currentPokemonDetails = [];
+        for (let i = 0; i < pokemonArray.length; i++) {
+            let pokemonDetailsAsHTTPResponse = await fetch(pokemonArray[i].url);
+            let pokemonDetails = await pokemonDetailsAsHTTPResponse.json();
+            let fetchedPokemonDetails = {
+                name: "",
+                url: "",
+                id: "",
+                types: [],
+            };
+            fetchedPokemonDetails.name = pokemonDetails.name;
+            fetchedPokemonDetails.url = pokemonArray[i].url;
+            fetchedPokemonDetails.id = pokemonDetails.id;
+            for (let j = 0; j < pokemonDetails.types.length; j++) {
+                fetchedPokemonDetails.types.push(pokemonDetails.types[j].type.name);
+            }
+            currentPokemonDetails.push(fetchedPokemonDetails);
         }
-        currentPokemonDetails.push(fetchedPokemonDetails);
+        return currentPokemonDetails;
+    } catch (error) {
+        console.error("Error in getPokemonDetails, error")
     }
-    return currentPokemonDetails;
 }
 
 // #endregion POKEMON MAIN CARDS
@@ -86,29 +102,37 @@ function capitalizeFirstLetter(string) {
 
 // #region POKEMON DETAIL CARDS
 async function openPokemonDetailCard(pokemonID) {
-    let pokemon = await buildBaseStatsObjectOfPokemonShown(pokemonID);
-    let detailCardHTML = getHTMLForPokemonDetailsForDetailCard(pokemon);
-    renderPokemonDetailCard(detailCardHTML);
-    await renderAllPokemonStats(pokemonID)
-    document.getElementById("pokemon_detail_card_dialog_id").showModal()
+    try {
+        let pokemon = await buildBaseStatsObjectOfPokemonShown(pokemonID);
+        let detailCardHTML = getHTMLForPokemonDetailsForDetailCard(pokemon);
+        renderPokemonDetailCard(detailCardHTML);
+        await renderAllPokemonStats(pokemonID)
+        document.getElementById("pokemon_detail_card_dialog_id").showModal()
+    } catch (error) {
+        console.error("Error in openPokemonDetailCard", error)
+    }
 }
 
 async function buildBaseStatsObjectOfPokemonShown(pokemonID) {
-    let pokemonBaseStatsAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID)
-    let pokemonBaseStats = await pokemonBaseStatsAsHTTPResponse.json();
-    let currentPokemonBaseStats = {
-        name: "",
-        types: [],
-        id: "",
-        url: ""
+    try {
+        let pokemonBaseStatsAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID)
+        let pokemonBaseStats = await pokemonBaseStatsAsHTTPResponse.json();
+        let currentPokemonBaseStats = {
+            name: "",
+            types: [],
+            id: "",
+            url: ""
+        }
+        currentPokemonBaseStats.name = pokemonBaseStats.name;
+        for (let i = 0; i < pokemonBaseStats.types.length; i++) {
+            currentPokemonBaseStats.types.push(pokemonBaseStats.types[i].type.name);
+        };
+        currentPokemonBaseStats.id = pokemonBaseStats.id;
+        currentPokemonBaseStats.url = "https://pokeapi.co/api/v2/pokemon/" + pokemonID;
+        return currentPokemonBaseStats;
+    } catch (error) {
+        console.error("Errr in buildBaseStatsObjectOfPokemonShown", error)
     }
-    currentPokemonBaseStats.name = pokemonBaseStats.name;
-    for (let i = 0; i < pokemonBaseStats.types.length; i++) {
-        currentPokemonBaseStats.types.push(pokemonBaseStats.types[i].type.name);
-    };
-    currentPokemonBaseStats.id = pokemonBaseStats.id;
-    currentPokemonBaseStats.url = "https://pokeapi.co/api/v2/pokemon/" + pokemonID;
-    return currentPokemonBaseStats;
 }
 
 function renderPokemonDetailCard(detailCardHTML) {
@@ -126,31 +150,39 @@ function getPokemonBackgroundForDetailCardHTML(pokemon) {
 }
 
 async function renderAllPokemonStats(pokemonID) {
-    await buildStatsMainArrayOfPokemonShown(pokemonID);
-    document.getElementById("stats_main_id").innerHTML = getHTMLForStatsMainOfPokemonShown();
-    await buildStatsStatsArrayOfPokemonShown(pokemonID);
-    document.getElementById("stats_stats_id").innerHTML = getHTMLForStatsStatsOfPokemonShown();
+    try {
+        await buildStatsMainArrayOfPokemonShown(pokemonID);
+        document.getElementById("stats_main_id").innerHTML = getHTMLForStatsMainOfPokemonShown();
+        await buildStatsStatsArrayOfPokemonShown(pokemonID);
+        document.getElementById("stats_stats_id").innerHTML = getHTMLForStatsStatsOfPokemonShown();
+    } catch (error) {
+        console.error("Error in renderAllPokemonStats", error)
+    }
 }
 
 async function buildStatsMainArrayOfPokemonShown(pokemonID) {
-    currentPokemonStatsMain = [];
-    let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID);
-    let pokemonStatsMain = await response.json();
-    let fetchedpokemonStatsMain = {
-        pokedexID: pokemonStatsMain.id,
-        generation: checkWhichGeneration(pokemonID),
-        height: pokemonStatsMain.height,
-        weight: pokemonStatsMain.weight,
-        baseExperience: pokemonStatsMain.base_experience,
-        abilities: [],
-    };
-    for (let i = 0; i < pokemonStatsMain.abilities.length; i++) {
-        fetchedpokemonStatsMain.abilities.push(
-            pokemonStatsMain.abilities[i].ability.name
-        );
+    try {
+        currentPokemonStatsMain = [];
+        let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID);
+        let pokemonStatsMain = await response.json();
+        let fetchedpokemonStatsMain = {
+            pokedexID: pokemonStatsMain.id,
+            generation: checkWhichGeneration(pokemonID),
+            height: pokemonStatsMain.height,
+            weight: pokemonStatsMain.weight,
+            baseExperience: pokemonStatsMain.base_experience,
+            abilities: [],
+        };
+        for (let i = 0; i < pokemonStatsMain.abilities.length; i++) {
+            fetchedpokemonStatsMain.abilities.push(
+                pokemonStatsMain.abilities[i].ability.name
+            );
+        }
+        currentPokemonStatsMain.push(fetchedpokemonStatsMain);
+        return currentPokemonStatsMain;
+    } catch (error) {
+        console.error("Error in buildStatsMainArrayOfPokemonShown", error)
     }
-    currentPokemonStatsMain.push(fetchedpokemonStatsMain);
-    return currentPokemonStatsMain;
 }
 
 function checkWhichGeneration(pokemonID) {
@@ -168,15 +200,19 @@ function checkWhichGeneration(pokemonID) {
 }
 
 async function buildStatsStatsArrayOfPokemonShown(pokemonID) {
-    let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID);
-    let pokemonStatsStats = await response.json();
-    currentPokemonStatsStats = {};
-    for (let i = 0; i < pokemonStatsStats.stats.length; i++) {
-        let statName = pokemonStatsStats.stats[i].stat.name;
-        let statValue = pokemonStatsStats.stats[i].base_stat;
-        currentPokemonStatsStats[statName] = statValue;
+    try {
+        let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID);
+        let pokemonStatsStats = await response.json();
+        currentPokemonStatsStats = {};
+        for (let i = 0; i < pokemonStatsStats.stats.length; i++) {
+            let statName = pokemonStatsStats.stats[i].stat.name;
+            let statValue = pokemonStatsStats.stats[i].base_stat;
+            currentPokemonStatsStats[statName] = statValue;
+        }
+        return currentPokemonStatsStats;
+    } catch (error) {
+        console.error("Error in buildStatsStatsArrayOfPokemonShown", error)
     }
-    return currentPokemonStatsStats;
 }
 
 function switchCategory(category, categoryTitle) {
@@ -194,31 +230,35 @@ function nextPokemon(pokemonID) {
     if (pokemonID < 493) {
         openPokemonDetailCard(pokemonID + 1)
         document.getElementById("next_button_id_" + pokemonID).classList.add("display_none")
-    } 
+    }
 }
 
 function previousPokemon(pokemonID) {
-    if (pokemonID > 1 ) {
+    if (pokemonID > 1) {
         openPokemonDetailCard(pokemonID - 1)
         document.getElementById("prev_button_id_" + pokemonID).classList.add("display_none")
-    } 
+    }
 }
 
 // #endregion POKEMON DETAIL CARDS
 
 // #region LOAD POKEMON BUTTON
 async function loadMorePokemons() {
-    showLoadingSpinner();
-    let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
-    let nextPokemonsWithDetails = await getPokemonDetails(nextPokemons);
-    for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
-        currentPokemons.push(nextPokemonsWithDetails[i]);
+    try {
+        showLoadingSpinner();
+        let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
+        let nextPokemonsWithDetails = await getPokemonDetails(nextPokemons);
+        for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
+            currentPokemons.push(nextPokemonsWithDetails[i]);
+        }
+        currentPokemonsCounter = currentPokemonsCounter + 20;
+        renderNewLoadedPokemonCards(nextPokemonsWithDetails)
+        setTimeout(() => {
+            hideLoadingSpinner();
+        }, 1000);
+    } catch (error) {
+        console.error("Error in loadMorePokemons, error")
     }
-    currentPokemonsCounter = currentPokemonsCounter + 20;
-    renderNewLoadedPokemonCards(nextPokemonsWithDetails)
-    setTimeout(() => {
-        hideLoadingSpinner();
-    }, 1000);
 }
 // #endregion LOAD POKEMON BUTTON
 
