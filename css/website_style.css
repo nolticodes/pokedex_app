@@ -73,6 +73,10 @@
     height: 32px;
 }
 
+.header_content_search_section img:hover {
+    cursor: pointer;
+}
+
 .header_content input {
     width: 280px;
     height: 32px;

@@ -21,7 +21,13 @@ header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    gap: 24px;
     padding: 0 60px;
+}
+
+.header_content img {
+    width: 48px;
+    height: 48px;
 }
 
 main {
@@ -38,6 +44,10 @@ main {
     min-height: calc(100dvh - 240px);
     background-color: rgb(11, 22, 29);
     padding: 60px 60px;
+}
+
+.main_content p {
+    font-size: 16px;
 }
 
 footer {
@@ -60,4 +70,14 @@ footer {
 
 footer img {
     width: 40px;
+}
+
+@media (max-width: 800px) {
+    .header_content {
+        padding: 0 16px;
+    }
+
+    .main_content {
+        padding: 0 16px;
+    }
 }
