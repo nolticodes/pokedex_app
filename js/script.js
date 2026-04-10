@@ -5,6 +5,7 @@ let currentPokemonStatsMain = [];
 let currentPokemonStatsStats = [];
 let currentPokemonEvoData = {};
 let filterdPokemons = [];
+let currentIndex = 0;
 
 async function logPokemons() {
     try {
@@ -100,18 +101,32 @@ async function getPokemonDetails(pokemonArray) {
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+function getCurrentIndex(pokemonID) {
+    if (filterdPokemons.length > 0) {
+            currentIndex = -1;
+            for (let i = 0; i < filterdPokemons.length; i++) {
+                if (pokemonID == filterdPokemons[i].url.split("/")[6]) {
+                    currentIndex = i;
+                }
+            }
+        } else {
+            currentIndex = -1;
+        }
+}
 // #endregion auxiliary functions
 
 // #region POKEMON DETAIL CARDS
 async function openPokemonDetailCard(pokemonID) {
     try {
+        getCurrentIndex(pokemonID)
         let pokemon = await buildBaseStatsObjectOfPokemonShown(pokemonID);
         let detailCardHTML = getHTMLForPokemonDetailsForDetailCard(pokemon);
         renderPokemonDetailCard(detailCardHTML);
         await renderAllPokemonStats(pokemonID);
-        document.getElementById("pokemon_detail_card_dialog_id").showModal()
+        document.getElementById("pokemon_detail_card_dialog_id").showModal();
     } catch (error) {
-        console.error("Error in openPokemonDetailCard", error)
+        console.error("Error in openPokemonDetailCard", error);
     }
 }
 
@@ -234,19 +249,15 @@ function switchCategory(category, categoryTitle) {
     document.getElementById(categoryTitle).classList.add("selected");
 }
 
-let currentIndex = 0;
 function nextPokemon(pokemonID) {
     if (filterdPokemons.length === 0) {
         if (pokemonID < 493) {
-            openPokemonDetailCard(pokemonID + 1)
+            openPokemonDetailCard(pokemonID + 1);
         }
     } else {
-        for (let i = 0; i < filterdPokemons.length; i++) {
-            if (pokemonID == filterdPokemons[i].url.split("/")[6]) {
-                currentIndex = i
-            }
-        } if (filterdPokemons.length > currentIndex + 1) {
-            openPokemonDetailCard(filterdPokemons[currentIndex + 1].url.split("/")[6])
+        if (currentIndex < filterdPokemons.length - 1) {
+            let nextID = filterdPokemons[currentIndex + 1].url.split("/")[6];
+            openPokemonDetailCard(nextID);
         }
     }
 }
@@ -254,15 +265,12 @@ function nextPokemon(pokemonID) {
 function previousPokemon(pokemonID) {
     if (filterdPokemons.length === 0) {
         if (pokemonID > 1) {
-            openPokemonDetailCard(pokemonID - 1)
+            openPokemonDetailCard(pokemonID - 1);
         }
     } else {
-        for (let i = 0; i < filterdPokemons.length; i++) {
-            if (pokemonID == filterdPokemons[i].url.split("/")[6]) {
-                currentIndex = i
-            }
-        } if (0 < currentIndex) {
-            openPokemonDetailCard(filterdPokemons[currentIndex - 1].url.split("/")[6])
+        if (currentIndex > 0) {
+            let prevID = filterdPokemons[currentIndex - 1].url.split("/")[6];
+            openPokemonDetailCard(prevID);
         }
     }
 }
