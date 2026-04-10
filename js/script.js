@@ -3,7 +3,8 @@ let currentPokemons = [];
 let currentPokemonsCounter = 0;
 let currentPokemonStatsMain = [];
 let currentPokemonStatsStats = [];
-let currentPokemonEvoData = {}
+let currentPokemonEvoData = {};
+let filterdPokemons = [];
 
 async function logPokemons() {
     try {
@@ -236,14 +237,12 @@ function switchCategory(category, categoryTitle) {
 function nextPokemon(pokemonID) {
     if (pokemonID < 493) {
         openPokemonDetailCard(pokemonID + 1)
-        document.getElementById("next_button_id_" + pokemonID).classList.add("display_none")
     }
 }
 
 function previousPokemon(pokemonID) {
     if (pokemonID > 1) {
         openPokemonDetailCard(pokemonID - 1)
-        document.getElementById("prev_button_id_" + pokemonID).classList.add("display_none")
     }
 }
 
@@ -270,16 +269,17 @@ async function loadMorePokemons() {
 // #endregion LOAD POKEMON BUTTON
 
 // #region SEARCH POKEMON 
-function searchPokemon() {
+async function searchPokemon() {
     let searchInputRef = document.getElementById("search_input_id").value.trim().toLowerCase();
     if (searchInputRef.length < 3) {
         renderPokemonCard(currentPokemons);
         return;
     }
-    let currentPokemonsFiltered = currentPokemons.filter(function (pokemon) {
+    let filterdPokemons = allPokemons.results.filter(function (pokemon) {
         return comparePokemonNames(pokemon, searchInputRef);
     });
-    renderPokemonCard(currentPokemonsFiltered);
+    
+    renderPokemonCard(await getPokemonDetails(filterdPokemons));
     document.getElementById("loadMorePokemonsButtonID").classList.add("display_none");
     document.getElementById("resetFilteredPokemonsButtonID").classList.remove("display_none")
 }
