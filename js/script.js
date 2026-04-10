@@ -280,6 +280,14 @@ function searchPokemon() {
         return comparePokemonNames(pokemon, searchInputRef);
     });
     renderPokemonCard(currentPokemonsFiltered);
+    document.getElementById("loadMorePokemonsButtonID").classList.add("display_none");
+    document.getElementById("resetFilteredPokemonsButtonID").classList.remove("display_none")
+}
+
+function resetFilteredPokemons() {
+    renderPokemonCard(currentPokemons);
+    document.getElementById("loadMorePokemonsButtonID").classList.remove("display_none");
+    document.getElementById("resetFilteredPokemonsButtonID").classList.add("display_none")
 }
 
 function comparePokemonNames(pokemon, searchInputRef) {
