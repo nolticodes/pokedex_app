@@ -231,7 +231,7 @@ progress:hover {
 
 .evo_chain img {
     width: 40%;
-    height: 50%;
+    height: 40%;
 }
 
 
@@ -257,5 +257,10 @@ progress:hover {
 
     .pokemon_detail_card_lower_half_categories_title h4 {
         font-size: 14px;
+    }
+
+    .evo_chain img {
+        width: 30%;
+        height: 30%;
     }
 }

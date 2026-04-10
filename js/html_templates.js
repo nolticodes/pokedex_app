@@ -259,6 +259,7 @@ function getHTMLForEvoChainOfPokemonShown() {
         return `
             <div class="pokemon_detail_card_lower_half_stats evo_chain">
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageNullID}.svg">
+                <p> > </p>
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageOneID}.svg">
             </div>
         `
@@ -266,7 +267,9 @@ function getHTMLForEvoChainOfPokemonShown() {
         return `
             <div class="pokemon_detail_card_lower_half_stats evo_chain">
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageNullID}.svg">
+                <p> > </p>
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageOneID}.svg">
+                <p> > </p>
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${currentPokemonEvoData.evoStageTwoID}.svg">            
             </div>
         `
