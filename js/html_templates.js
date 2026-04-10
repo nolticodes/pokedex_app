@@ -149,6 +149,7 @@ function getHTMLForPokemonDetailsForDetailCard(pokemon) {
         <section class="pokemon_detail_card_upper_half">
             <div class="pokemon_detail_card_upper_half_title">
                 <h2>#${pokemon.id} ${capitalizeFirstLetter(pokemon.name)}</h2>
+                <p onclick="closePokemonDetailCard()">x</p>
             </div>
             ${getPokemonBackgroundForDetailCardHTML(pokemon)}
             <div class="pokemon_detail_card_upper_half_img_type">

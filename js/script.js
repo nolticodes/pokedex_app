@@ -114,6 +114,10 @@ async function openPokemonDetailCard(pokemonID) {
     }
 }
 
+function closePokemonDetailCard() {
+    document.getElementById("pokemon_detail_card_dialog_id").close()
+}
+
 async function buildBaseStatsObjectOfPokemonShown(pokemonID) {
     try {
         let pokemonBaseStatsAsHTTPResponse = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemonID)

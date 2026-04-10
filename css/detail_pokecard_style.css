@@ -33,6 +33,16 @@ dialog::backdrop {
     text-align: center;
 }
 
+.pokemon_detail_card_upper_half_title p {
+    font-size: 24px;
+    position: absolute;
+    right: 16px
+}
+
+.pokemon_detail_card_upper_half_title p:hover {
+    cursor: pointer;
+}
+
 .pokemon_detail_card_upper_half_img_pokemon {
     width: 100%;
     height: 70%;
