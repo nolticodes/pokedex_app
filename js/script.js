@@ -19,7 +19,7 @@ async function logPokemons() {
 async function init() {
     try {
         await logPokemons();
-        await renderTwentyPokemonCards();
+        await loadMorePokemons();
     } catch (error) {
         console.log("Error in init", error)
     }
@@ -52,21 +52,6 @@ function renderPokemonType(pokemonTypes) {
         typeHTML += getHTMLForPokemonType(pokemonTypes[i])
     }
     return typeHTML
-}
-
-async function renderTwentyPokemonCards() {
-    try {
-        let firstTwentyPokemons = [];
-        for (let i = 0; i < 20; i++) {
-            firstTwentyPokemons.push(allPokemons.results[i]);
-        }
-        let detailedPokemons = await getPokemonDetails(firstTwentyPokemons);
-        currentPokemons = detailedPokemons;
-        currentPokemonsCounter = 20;
-        renderPokemonCard(currentPokemons);
-    } catch (error) {
-        console.error("Error in renderTwentyPokemonCards", error)
-    }
 }
 
 async function getPokemonDetails(pokemonArray) {
@@ -286,13 +271,17 @@ async function loadMorePokemons() {
         for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
             currentPokemons.push(nextPokemonsWithDetails[i]);
         }
+        if (currentPokemonsCounter === 0) {
+            renderPokemonCard(currentPokemons);
+        } else {
+            renderNewLoadedPokemonCards(nextPokemonsWithDetails);
+        }
         currentPokemonsCounter = currentPokemonsCounter + 20;
-        renderNewLoadedPokemonCards(nextPokemonsWithDetails)
         setTimeout(() => {
             hideLoadingSpinner();
         }, 1000);
     } catch (error) {
-        console.error("Error in loadMorePokemons", error)
+        console.error("Error in loadMorePokemons", error);
     }
 }
 // #endregion LOAD POKEMON BUTTON
