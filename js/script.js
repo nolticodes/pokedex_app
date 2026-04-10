@@ -252,8 +252,19 @@ function nextPokemon(pokemonID) {
 }
 
 function previousPokemon(pokemonID) {
-    if (pokemonID > 1) {
-        openPokemonDetailCard(pokemonID - 1)
+    if (filterdPokemons.length === 0) {
+        if (pokemonID > 1) {
+            openPokemonDetailCard(pokemonID - 1)
+        }
+    } else {
+        let currentIndex = 0; 
+        for (let i = 0; i < filterdPokemons.length; i++) {
+            if (pokemonID == filterdPokemons[i].url.split("/")[6]) {
+                currentIndex = i
+            }
+        } if (0 < currentIndex) {
+            openPokemonDetailCard(filterdPokemons[currentIndex - 1].url.split("/")[6])
+        }
     }
 }
 
