@@ -235,8 +235,19 @@ function switchCategory(category, categoryTitle) {
 }
 
 function nextPokemon(pokemonID) {
-    if (pokemonID < 493) {
-        openPokemonDetailCard(pokemonID + 1)
+    if (filterdPokemons.length === 0) {
+        if (pokemonID < 493) {
+            openPokemonDetailCard(pokemonID + 1)
+        }
+    } else {
+        let currentIndex = 0;
+        for (let i = 0; i < filterdPokemons.length; i++) {
+            if (pokemonID == filterdPokemons[i].url.split("/")[6]) {
+                currentIndex = i
+            }
+        } if (filterdPokemons.length > currentIndex + 1) {
+            openPokemonDetailCard(filterdPokemons[currentIndex + 1].url.split("/")[6])
+        }
     }
 }
 
@@ -275,10 +286,10 @@ async function searchPokemon() {
         renderPokemonCard(currentPokemons);
         return;
     }
-    let filterdPokemons = allPokemons.results.filter(function (pokemon) {
+    filterdPokemons = allPokemons.results.filter(function (pokemon) {
         return comparePokemonNames(pokemon, searchInputRef);
     });
-    
+    console.log(filterdPokemons)
     renderPokemonCard(await getPokemonDetails(filterdPokemons));
     document.getElementById("loadMorePokemonsButtonID").classList.add("display_none");
     document.getElementById("resetFilteredPokemonsButtonID").classList.remove("display_none")
@@ -287,7 +298,8 @@ async function searchPokemon() {
 function resetFilteredPokemons() {
     renderPokemonCard(currentPokemons);
     document.getElementById("loadMorePokemonsButtonID").classList.remove("display_none");
-    document.getElementById("resetFilteredPokemonsButtonID").classList.add("display_none")
+    document.getElementById("resetFilteredPokemonsButtonID").classList.add("display_none");
+    filterdPokemons = [];
 }
 
 function comparePokemonNames(pokemon, searchInputRef) {
@@ -373,11 +385,11 @@ function checkStage(stageChain) {
 }
 
 function getPokemonIDWithPokemonName(pokemonName) {
-    let pokemonObject = allPokemons.results.find(function(pokemon) {
+    let pokemonObject = allPokemons.results.find(function (pokemon) {
         return pokemon.name === pokemonName;
     });
     let pokemonID = pokemonObject.url.split("/")[6];
-    return pokemonID 
+    return pokemonID
 }
 
 // #endregion EVOCHAIN
