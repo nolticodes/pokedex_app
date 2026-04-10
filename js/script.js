@@ -234,13 +234,13 @@ function switchCategory(category, categoryTitle) {
     document.getElementById(categoryTitle).classList.add("selected");
 }
 
+let currentIndex = 0;
 function nextPokemon(pokemonID) {
     if (filterdPokemons.length === 0) {
         if (pokemonID < 493) {
             openPokemonDetailCard(pokemonID + 1)
         }
     } else {
-        let currentIndex = 0;
         for (let i = 0; i < filterdPokemons.length; i++) {
             if (pokemonID == filterdPokemons[i].url.split("/")[6]) {
                 currentIndex = i
@@ -257,7 +257,6 @@ function previousPokemon(pokemonID) {
             openPokemonDetailCard(pokemonID - 1)
         }
     } else {
-        let currentIndex = 0; 
         for (let i = 0; i < filterdPokemons.length; i++) {
             if (pokemonID == filterdPokemons[i].url.split("/")[6]) {
                 currentIndex = i

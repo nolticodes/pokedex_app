@@ -131,19 +131,36 @@ function getPokemonBackgroundHTML(pokemon) {
 function getHTMLForPokemonDetailsForDetailCard(pokemon) {
     let nextButtonHTML = "";
     let prevButtonHTML = "";
-    if (pokemon.id < 493) {
-        nextButtonHTML = `
+    if (filterdPokemons.length > 0) {
+        if (currentIndex < filterdPokemons.length - 1) {
+            nextButtonHTML = `
             <div class="img_next_button" onclick="nextPokemon(${pokemon.id})">
                 <img src="./assets/img/img/next_prev_icon.svg">
             </div>
         `;
-    }
-    if (pokemon.id > 1) {
-        prevButtonHTML = `
+        }
+        if (0 < currentIndex) {
+            prevButtonHTML = `
             <div class="img_prev_button" onclick="previousPokemon(${pokemon.id})">
                 <img src="./assets/img/img/next_prev_icon.svg">
             </div>
         `;
+        }
+    } else {
+        if (pokemon.id < 493) {
+            nextButtonHTML = `
+            <div class="img_next_button" onclick="nextPokemon(${pokemon.id})">
+                <img src="./assets/img/img/next_prev_icon.svg">
+            </div>
+        `;
+        }
+        if (pokemon.id > 1) {
+            prevButtonHTML = `
+            <div class="img_prev_button" onclick="previousPokemon(${pokemon.id})">
+                <img src="./assets/img/img/next_prev_icon.svg">
+            </div>
+        `;
+        }
     }
     return `
         <section class="pokemon_detail_card_upper_half">
