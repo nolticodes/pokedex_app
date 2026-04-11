@@ -6,71 +6,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <!-- SCRIPTS -->
+    <script defer src="./js/db.js"></script>
+    <script defer src="./js/html_templates.js"></script>
+    <script defer src="./js/script.js"></script>
+
+    <!-- STYLE -->
+    <link rel="stylesheet" href="./css/content_sizing.css">
+    <link rel="stylesheet" href="./css/website_style.css">
+    <link rel="stylesheet" href="./css/main_pokecard_style.css">
+    <link rel="stylesheet" href="./css/detail_pokecard_style.css">
+    <link rel="stylesheet" href="./css/background_type.css">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="./assets/img/img/pokeball_icon_2.png">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+
     <style>
-        .pokecard {
-            position: relative;
-            width: 400px;
-            height: 500px;
+        .pokemon_detail_card_dialog_style2 {
+            width: 800px;
+            height: 700px;
+            border: none;
+            border-radius: 24px;
             background-color: red;
+            top: calc((100% - 700px)/2);
+            left: calc((100% - 800px)/2);
             display: flex;
+            padding: 0;
+            overflow: hidden;
         }
 
-        .img_left {
-            width: 50%;
+        .dialog_pokedex_left {
+            width: 47.5%;
             height: 100%;
+            background-color: blue;
+            padding: 16px;
         }
 
-        .img_left img {
-            width: 100%;
+        .dialog_pokedex_middle_fold {
+            width: 5%;
             height: 100%;
-            object-fit: cover;
-            object-position: center;
+            background-color: black;
         }
 
-        .img_right {
-            width: 50%;
+        .dialog_pokedex_right {
+            width: 47.5%;
             height: 100%;
+            background-color: green;
+            padding: 16px;
         }
 
-        .img_right img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+        .dialog_pokedex_left_header {
+            height: 15%;
+            background-color: orange;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
         }
 
-        .pokemon_img {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: calc((100% - 200px)/2);
-            left: calc((100% - 200px)/2);
+        .big_circle_light {
+            width: 80px;
+            height: 80px;
+            background-color: #03AEEF;
+            border-radius: 50%;
         }
 
-        .pokemon_img img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            object-position: center;
+        .small_circle_light {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
         }
 
+        .position_small_circle_lights {
+            padding-left: 16px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+        .red {
+            background-color: red;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .green {
+            background-color: green;
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="pokecard">
+    <dialog class="pokemon_detail_card_dialog_style2" id="pokemon_detail_card_dialog_id" open>
+        <div class="dialog_pokedex_left">
+            <div class="dialog_pokedex_left_header">
+                <div class="big_circle_light">
+                </div>
+                <div class="position_small_circle_lights">
+                    <div class="small_circle_light red">
+                    </div>
+                    <div class="small_circle_light yellow">
+                    </div>
+                    <div class="small_circle_light green">
+                    </div>
+                </div>
+            </div>
+            <div class="dialog_pokedex_left_screen">
 
-        <div class="img_left">
-            <img src="./assets/img/type_backgrounds/type_dark_background.png">
+            </div>
+            <div class="" dialog_pokedex_left_footer_buttons>
+
+            </div>
+        </div>
+        <div class="dialog_pokedex_middle_fold">
+
         </div>
 
-        <div class="img_right">
-            <img src="./assets/img/type_backgrounds/type_fire_background.png">
+        <div class="dialog_pokedex_right">
+
         </div>
-        <div class="pokemon_img">
-            <img src="./assets/img/img/pokeball_icon.svg" </div>
-        </div>
+
+    </dialog>
 
 </body>
 
