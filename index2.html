@@ -43,37 +43,39 @@
             overflow: hidden;
         }
 
-        
+
 
         .dialog_pokedex_middle_fold {
             width: 5%;
             height: 100%;
-            background-color: black;
+            background-color: #AF272F;
         }
 
         .dialog_pokedex_right {
             width: 47.5%;
             height: 100%;
-            background-color: green;
+            background-color: #D22429;
             padding: 16px;
         }
 
         .dialog_pokedex_left {
             width: 47.5%;
             height: 100%;
-            background-color: blue;
+            background-color: #D22429;
             padding: 16px;
             display: flex;
             flex-direction: column;
             gap: 16px
         }
+
         .dialog_pokedex_left_header {
             height: 15%;
-            background-color: orange;
+
             display: flex;
             justify-content: flex-start;
             align-items: center;
         }
+
         .big_circle_light {
             width: 80px;
             height: 80px;
@@ -82,12 +84,14 @@
             border: 2px solid black;
 
         }
+
         .small_circle_light {
             width: 16px;
             height: 16px;
             border-radius: 50%;
             border: 1px solid black;
         }
+
         .position_small_circle_lights {
             padding-left: 16px;
             height: 80px;
@@ -95,12 +99,15 @@
             justify-content: center;
             gap: 16px;
         }
+
         .red {
             background-color: red;
         }
+
         .yellow {
             background-color: yellow;
         }
+
         .green {
             background-color: green;
         }
@@ -113,7 +120,8 @@
             border-radius: 16px;
             display: flex;
             flex-direction: column;
-            align-items: center;padding-top: 16px;
+            align-items: center;
+            padding-top: 16px;
         }
 
         .dialog_pokedex_left_screen_section_screen {
@@ -130,12 +138,14 @@
             align-items: center;
             justify-content: space-between;
         }
+
         .line_speaker {
             width: 80px;
             height: 4px;
             border-radius: 2px;
             background-color: #242622;
         }
+
         .speaker {
             display: flex;
             flex-direction: column;
@@ -156,10 +166,93 @@
         .dialog_pokedex_left_screen_section_speaker button:hover {
             cursor: pointer;
         }
+
         .dialog_pokedex_left_screen_section_speaker img {
             width: 20px;
         }
 
+        .dialog_pokedex_left_footer_buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button_direction_section {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .button_direction {
+            height: 40px;
+            width: 40px;
+            background-color: #58585A;
+            border-radius: 5px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border: 2px solid black;
+            border-bottom: none;
+        }
+
+        .down {
+            rotate: 180deg;
+        }
+
+        .next {
+            rotate: 90deg;
+        }
+
+        .prev {
+            rotate: 270deg;
+        }
+
+        .middle {
+            border: none;
+            border-radius: 0;
+        }
+
+        .sound_display {
+            width: 200px;
+            height: 120px;
+            background-color: #60914A;
+            border: 3px solid black;
+            border-radius: 8px;
+        }
+
+        .dialog_pokedex_right_screen_section {
+            width: 100%;
+            height: 78%;
+            background-color: #60914A;
+            border: 3px solid black;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 16px;
+        }
+
+        .category_selection {
+            width: 100%;
+            height: 22%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .category_button {
+            width: calc(100% / 3);
+            height: 56px;
+            background-color: #28BDE8;
+            border: 1px solid black;
+            
+        }
+        .left {
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px
+        }
+
+        .right {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px
+        }
     </style>
 </head>
 
@@ -183,11 +276,11 @@
                 <div class="dialog_pokedex_left_screen_section_screen">
                 </div>
                 <div class="dialog_pokedex_left_screen_section_speaker">
-                    <button> 
-                        <img src="./assets/img/img/sound_icon.svg"> 
+                    <button>
+                        <img src="./assets/img/img/sound_icon.svg">
                     </button>
 
-                    <div class="speaker">   
+                    <div class="speaker">
                         <div class="line_speaker"></div>
                         <div class="line_speaker"></div>
                         <div class="line_speaker"></div>
@@ -196,8 +289,29 @@
                 </div>
 
             </div>
-            <div class="" dialog_pokedex_left_footer_buttons>
+            <div class="dialog_pokedex_left_footer_buttons">
 
+                <div class="sound_display">
+                </div>
+
+                <div class="button_direction_section">
+                    <div class="button_direction prev">
+                    </div>
+
+                    <div class="button_direction_section_middel_part">
+                        <div class="button_direction up">
+                        </div>
+                        <div class="button_direction middle">
+                        </div>
+                        <div class="button_direction down">
+                        </div>
+                    </div>
+
+                    <div class="button_direction next">
+                    </div>
+
+
+                </div>
             </div>
         </div>
         <div class="dialog_pokedex_middle_fold">
@@ -205,7 +319,16 @@
         </div>
 
         <div class="dialog_pokedex_right">
-
+            <div class="dialog_pokedex_right_screen_section">
+            </div>
+            <div class="category_selection">
+                <div class="category_button left">
+                </div>
+                <div class="category_button">
+                </div>
+                <div class="category_button right">
+                </div>
+            </div>
         </div>
 
     </dialog>
