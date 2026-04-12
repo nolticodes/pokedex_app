@@ -265,8 +265,8 @@ function previousPokemon(pokemonID) {
 // #region LOAD POKEMON BUTTON
 async function loadMorePokemons() {
     try {
-        showLoadingSpinner();
         document.body.classList.add("stop_scrolling")
+        showLoadingSpinner();
         let nextPokemons = allPokemons.results.slice(currentPokemonsCounter, currentPokemonsCounter + 20);
         let nextPokemonsWithDetails = await getPokemonDetails(nextPokemons);
         for (let i = 0; i < nextPokemonsWithDetails.length; i++) {
@@ -280,8 +280,9 @@ async function loadMorePokemons() {
         currentPokemonsCounter = currentPokemonsCounter + 20;
         setTimeout(() => {
             hideLoadingSpinner();
+            document.body.classList.remove("stop_scrolling")
         }, 1000);
-        document.body.classList.remove("stop_scrolling")
+        
     } catch (error) {
         console.error("Error in loadMorePokemons", error);
     }
