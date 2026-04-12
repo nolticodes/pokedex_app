@@ -3,6 +3,10 @@
     color: white;
 }
 
+.stop_scrolling {
+    overflow: hidden;
+}
+
 /* LOADING SPINNER */
 .loader {
     position: fixed;
