@@ -28,8 +28,17 @@
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet">
 
-
     <style>
+        @font-face {
+            font-family: 'PokemonGb';
+            src: url(./assets/fonts/PokemonGb.ttf);
+        }
+
+        h1,
+        h2 {
+            font-family: 'PokemonGB';
+        }
+
         .pokemon_detail_card_dialog_style2 {
             width: 800px;
             height: 700px;
@@ -237,13 +246,15 @@
             justify-content: center;
             align-items: center;
         }
+
         .category_button {
             width: calc(100% / 3);
             height: 56px;
             background-color: #28BDE8;
             border: 1px solid black;
-            
+
         }
+
         .left {
             border-top-left-radius: 6px;
             border-bottom-left-radius: 6px
@@ -253,11 +264,16 @@
             border-top-right-radius: 6px;
             border-bottom-right-radius: 6px
         }
+
+        .dialog_pokedex_right_screen_section h2 {
+            font-size: 16px;
+            color: #E9FFD9;
+        }
     </style>
 </head>
 
 <body>
-
+    <h1 style="color: black;">TEST</h1>
     <dialog class="pokemon_detail_card_dialog_style2" id="pokemon_detail_card_dialog_id" open>
         <div class="dialog_pokedex_left">
             <div class="dialog_pokedex_left_header">
@@ -320,6 +336,7 @@
 
         <div class="dialog_pokedex_right">
             <div class="dialog_pokedex_right_screen_section">
+                <h2>Pokemon Name</h2>
             </div>
             <div class="category_selection">
                 <div class="category_button left">

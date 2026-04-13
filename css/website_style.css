@@ -3,6 +3,11 @@
     color: white;
 }
 
+@font-face {
+            font-family: 'PokemonGb';
+            src: url(../assets/fonts/PokemonGb.ttf);
+        }
+
 .stop_scrolling {
     overflow: hidden;
 }
