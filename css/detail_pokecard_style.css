@@ -1,0 +1,266 @@
+html:has(dialog[open]),
+body:has(dialog[open]) {
+    overflow: hidden;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.8)
+}
+
+.pokemon_detail_card_dialog_style {
+    padding: 0;
+    width: 400px;
+    height: 600px;
+    border-radius: 16px;
+    border: none;
+    top: calc((100% - 600px)/2);
+    left: calc((100% - 400px)/2);
+}
+
+.pokemon_detail_card_upper_half {
+    width: 100%;
+    height: 50%;
+    background-color: rgb(12, 30, 37);
+    position: relative;
+}
+
+.pokemon_detail_card_upper_half_title {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.pokemon_detail_card_upper_half_title p {
+    font-size: 24px;
+    position: absolute;
+    right: 16px
+}
+
+.pokemon_detail_card_upper_half_title p:hover {
+    cursor: pointer;
+}
+
+.pokemon_detail_card_upper_half_img_pokemon {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    position: relative;
+}
+
+.pokemon_detail_card_upper_half_img_pokemon_img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon_detail_card_upper_half_img_pokemon_img img {
+    height: 80%;
+}
+
+.pokemon_detail_card_upper_half_img_type {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px
+}
+
+.pokemon_detail_card_upper_half_img_type img {
+    height: 100%;
+}
+
+.img_next_button {
+    position: absolute;
+    top: calc((100% - 40px)/2);
+    right: 16px
+}
+
+.img_next_button:hover {
+    cursor: pointer;
+}
+
+.img_next_button img {
+    width: 40px;
+    height: 40px;
+}
+
+.img_prev_button {
+    position: absolute;
+    top: calc((100% - 40px)/2);
+    left: 16px
+}
+
+.img_prev_button:hover {
+    cursor: pointer;
+}
+
+.img_prev_button img {
+    width: 40px;
+    height: 40px;
+    rotate: 180deg;
+}
+
+.pokemon_detail_card_lower_half {
+    width: 100%;
+    height: 50%;
+    background-color: rgb(16, 44, 57);
+}
+
+.pokemon_detail_card_lower_half_categories {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon_detail_card_lower_half_categories_title {
+    background-color: rgb(20, 61, 78);
+    height: 100%;
+    width: calc(100% / 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon_detail_card_lower_half_categories_title:hover {
+    cursor: pointer;
+    background-color: rgb(40, 90, 110);
+}
+
+.pokemon_detail_card_lower_half_categories_title h4 {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.selected h4 {
+    font-weight: 800;
+}
+
+.selected {
+    background-color: rgb(40, 90, 110);
+}
+
+.display_none {
+    display: none
+}
+
+.display {
+    display: block;
+}
+
+#stats_main_id {
+    height: 85%;
+    width: 100%;
+}
+
+.pokemon_detail_card_lower_half_stats {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px 16px;
+}
+
+.pokemin_detail_card_lower_half_stats_textline p {
+    min-width: 200px;
+    font-size: 16px;
+}
+
+.pokemin_detail_card_lower_half_stats_textline span {
+    font-size: 16px;
+}
+
+.pokemin_detail_card_lower_half_stats_textline {
+    display: flex;
+}
+
+#stats_stats_id {
+    height: 85%;
+    width: 100%;
+}
+
+/* PROGRESSBAR */
+progress {
+    flex: 1;
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgb(11, 22, 29);
+    appearance: none;
+}
+
+progress::-webkit-progress-bar {
+    background-color: rgb(40, 90, 110);
+}
+
+progress::-webkit-progress-value {
+    background-color: rgb(140, 190, 170);
+    ;
+}
+
+progress:hover {
+    filter: none;
+    opacity: 1;
+}
+
+/* EVOCHAIN */
+#stats_evo_id {
+    height: 85%;
+    width: 100%;
+}
+
+.evo_chain {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.evo_chain img {
+    width: 40%;
+    height: 40%;
+}
+
+
+/* RESPOSNIVE */
+@media (max-width: 750px) {
+    .pokemon_detail_card_dialog_style {
+        width: 300px;
+        left: calc((100% - 300px) / 2)
+    }
+
+    .pokemon_detail_card_upper_half_img_pokemon_img img {
+        height: 70%;
+    }
+
+    .pokemin_detail_card_lower_half_stats_textline p {
+        font-size: 14px;
+        min-width: 160px;
+    }
+
+    .pokemin_detail_card_lower_half_stats_textline span {
+        font-size: 14px;
+    }
+
+    .pokemon_detail_card_lower_half_categories_title h4 {
+        font-size: 14px;
+    }
+
+    .evo_chain img {
+        width: 30%;
+        height: 30%;
+    }
+}
